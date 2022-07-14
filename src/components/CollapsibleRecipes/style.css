@@ -1,0 +1,9 @@
+.Collapsible {
+    background-color: aquamarine;
+}
+.Collapsible__trigger{
+    background-color: bisque;
+}
+.recipe {
+    background-color: aliceblue;
+}
