@@ -1,0 +1,187 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    background-color: #041129;
+    font-size: 16px;
+    z-index: 1;
+    justify-content: right;
+}
+
+.active {
+    font-weight: bold;
+}
+
+
+.topnav {
+    display: none;
+}
+
+.navBar>li {
+    padding: 1.5vw;
+    margin-top: 5vh;
+}
+
+.navBar>li>a {
+    cursor: pointer
+}
+
+.sidenav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sideNavBar>li>a {
+    cursor: pointer
+}
+
+.sideModal {
+    position: absolute;
+    height: 100vh;
+    background-color: #081e48;
+    width: 70%;
+    z-index: 9998;
+}
+
+.sideNavBar {
+    padding-top: 20vh;
+}
+
+.sideNavBar>li {
+    list-style-type: none;
+    padding: 5px;
+    padding-top: 5%;
+    padding-left: 10%;
+    font-size: 1.5em;
+}
+
+
+.navIcon {
+    z-index: 9999;
+    margin: 25px;
+    padding: 10px 15px;
+    background-color: #081e48;
+    border: none;
+    outline: none;
+}
+
+.navIconBorder {
+    border: 3px solid #0AC3FF;
+    background-color: #041129;
+}
+
+.navIcon>i {
+    font-size: 30px;
+    color: #FF0A78;
+}
+
+
+
+@media (min-width: 320px) {
+    header {
+        font-size: 20px;
+    }
+
+    .sideNavBar {
+        padding-top: 22vh;
+    }
+
+    .sideNavBar>li {
+        padding: 15px;
+        padding-left: 15%;
+    }
+
+    .navIcon>i {
+        font-size: 50px;
+    }
+
+    .sideNavBar>li:last-child {
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 360px) {
+    header {
+        font-size: 20px;
+    }
+
+    .sideNavBar {
+        padding-top: 20vh;
+    }
+
+    .sideNavBar>li {
+        padding: 25px;
+        padding-top: 5%;
+        padding-left: 20%;
+        font-size: 1.5em;
+    }
+
+
+    .sideNavBar {
+        padding-top: 22vh;
+    }
+
+    .sideNavBar>li:last-child {
+        margin-top: 30px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .navIcon {
+        margin: 30px;
+    }
+
+    .sideModal {
+        width: 60%;
+        height: 100vh;
+    }
+
+    .sideNavBar>li {
+        font-size: 1.75em;
+    }
+
+    .sideNavBar {
+        padding-top: 20vh;
+    }
+
+    .sideNavBar>li:last-child {
+        margin-top: 30px;
+    }
+}
+
+@media (min-width: 960px) {
+    .sideNavBar {
+        padding-top: 10vh;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sidenav {
+        display: none;
+    }
+
+    .sideModal {
+        display: none;
+        visibility: hidden;
+    }
+
+    .topnav {
+        display: flex;
+        width: 100%;
+    }
+
+    .navBar {
+        display: flex;
+    }
+
+    .navBar>li {
+        padding: 15px;
+        margin-top: 55px;
+        font-size: 1.15em;
+        list-style-type: none;
+    }
+
+}

@@ -5,3 +5,4 @@ export { default as MealPlan } from './MealPlan';
 export { default as Recipe } from './Recipe';
 export { default as Register } from './Register';
 export { default as ShoppingList } from './ShoppingList';
+export { default as UserPreferences } from './UserPreferences';

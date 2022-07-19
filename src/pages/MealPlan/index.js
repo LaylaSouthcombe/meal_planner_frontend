@@ -1,389 +1,403 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
+import './style.css'
 import { CollapsibleRecipes } from '../../components';
 
+import apiKey from '../../'
+
 const MealPlan = () => {
+
+    const state = useSelector((state) => state.user_state);
+    console.log(state)
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
-    const [recipes, setRecipes] = useState([
-        {
-            "id": 716429,
-            "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-            "image": "https://spoonacular.com/recipeImages/716429-556x370.jpg",
-            "imageType": "jpg",
-            "servings": 2,
-            "readyInMinutes": 45,
-            "license": "CC BY-SA 3.0",
-            "sourceName": "Full Belly Sisters",
-            "sourceUrl": "http://fullbellysisters.blogspot.com/2012/06/pasta-with-garlic-scallions-cauliflower.html",
-            "spoonacularSourceUrl": "https://spoonacular.com/pasta-with-garlic-scallions-cauliflower-breadcrumbs-716429",
-            "aggregateLikes": 209,
-            "healthScore": 19.0,
-            "spoonacularScore": 83.0,
-            "pricePerServing": 163.15,
-            "analyzedInstructions": [],
-            "cheap": false,
-            "creditsText": "Full Belly Sisters",
-            "cuisines": [],
-            "dairyFree": false,
-            "diets": [],
-            "gaps": "no",
-            "glutenFree": false,
-            "instructions": "",
-            "ketogenic": false,
-            "lowFodmap": false,
-            "occasions": [],
-            "sustainable": false,
-            "vegan": false,
-            "vegetarian": false,
-            "veryHealthy": false,
-            "veryPopular": false,
-            "whole30": false,
-            "weightWatcherSmartPoints": 17,
-            "dishTypes": [
-                "lunch",
-                "main course",
-                "main dish",
-                "dinner"
-            ],
-            "extendedIngredients": [
-                {
-                    "aisle": "Milk, Eggs, Other Dairy",
-                    "amount": 1.0,
-                    "consitency": "solid",
-                    "id": 1001,
-                    "image": "butter-sliced.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 1.0,
-                            "unitLong": "Tbsp",
-                            "unitShort": "Tbsp"
-                        },
-                        "us": {
-                            "amount": 1.0,
-                            "unitLong": "Tbsp",
-                            "unitShort": "Tbsp"
-                        }
-                    },
-                    "meta": [],
-                    "name": "butter",
-                    "original": "1 tbsp butter",
-                    "originalName": "butter",
-                    "unit": "tbsp"
-                },
-                {
-                    "aisle": "Produce",
-                    "amount": 2.0,
-                    "consitency": "solid",
-                    "id": 10011135,
-                    "image": "cauliflower.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 473.176,
-                            "unitLong": "milliliters",
-                            "unitShort": "ml"
-                        },
-                        "us": {
-                            "amount": 2.0,
-                            "unitLong": "cups",
-                            "unitShort": "cups"
-                        }
-                    },
-                    "meta": [
-                        "frozen",
-                        "thawed",
-                        "cut into bite-sized pieces"
-                    ],
-                    "name": "cauliflower florets",
-                    "original": "about 2 cups frozen cauliflower florets, thawed, cut into bite-sized pieces",
-                    "originalName": "about frozen cauliflower florets, thawed, cut into bite-sized pieces",
-                    "unit": "cups"
-                },
-                {
-                    "aisle": "Cheese",
-                    "amount": 2.0,
-                    "consitency": "solid",
-                    "id": 1041009,
-                    "image": "cheddar-cheese.png",
-                    "measures": {
-                        "metric": {
-                            "amount": 2.0,
-                            "unitLong": "Tbsps",
-                            "unitShort": "Tbsps"
-                        },
-                        "us": {
-                            "amount": 2.0,
-                            "unitLong": "Tbsps",
-                            "unitShort": "Tbsps"
-                        }
-                    },
-                    "meta": [
-                        "grated",
-                        "(I used romano)"
-                    ],
-                    "name": "cheese",
-                    "original": "2 tbsp grated cheese (I used romano)",
-                    "originalName": "grated cheese (I used romano)",
-                    "unit": "tbsp"
-                },
-                {
-                    "aisle": "Oil, Vinegar, Salad Dressing",
-                    "amount": 1.0,
-                    "consitency": "liquid",
-                    "id": 1034053,
-                    "image": "olive-oil.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 1.0,
-                            "unitLong": "Tbsp",
-                            "unitShort": "Tbsp"
-                        },
-                        "us": {
-                            "amount": 1.0,
-                            "unitLong": "Tbsp",
-                            "unitShort": "Tbsp"
-                        }
-                    },
-                    "meta": [],
-                    "name": "extra virgin olive oil",
-                    "original": "1-2 tbsp extra virgin olive oil",
-                    "originalName": "extra virgin olive oil",
-                    "unit": "tbsp"
-                },
-                {
-                    "aisle": "Produce",
-                    "amount": 5.0,
-                    "consitency": "solid",
-                    "id": 11215,
-                    "image": "garlic.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 5.0,
-                            "unitLong": "cloves",
-                            "unitShort": "cloves"
-                        },
-                        "us": {
-                            "amount": 5.0,
-                            "unitLong": "cloves",
-                            "unitShort": "cloves"
-                        }
-                    },
-                    "meta": [],
-                    "name": "garlic",
-                    "original": "5-6 cloves garlic",
-                    "originalName": "garlic",
-                    "unit": "cloves"
-                },
-                {
-                    "aisle": "Pasta and Rice",
-                    "amount": 6.0,
-                    "consitency": "solid",
-                    "id": 20420,
-                    "image": "fusilli.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 170.097,
-                            "unitLong": "grams",
-                            "unitShort": "g"
-                        },
-                        "us": {
-                            "amount": 6.0,
-                            "unitLong": "ounces",
-                            "unitShort": "oz"
-                        }
-                    },
-                    "meta": [
-                        "(I used linguine)"
-                    ],
-                    "name": "pasta",
-                    "original": "6-8 ounces pasta (I used linguine)",
-                    "originalName": "pasta (I used linguine)",
-                    "unit": "ounces"
-                },
-                {
-                    "aisle": "Spices and Seasonings",
-                    "amount": 2.0,
-                    "consitency": "solid",
-                    "id": 1032009,
-                    "image": "red-pepper-flakes.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 2.0,
-                            "unitLong": "pinches",
-                            "unitShort": "pinches"
-                        },
-                        "us": {
-                            "amount": 2.0,
-                            "unitLong": "pinches",
-                            "unitShort": "pinches"
-                        }
-                    },
-                    "meta": [
-                        "red"
-                    ],
-                    "name": "red pepper flakes",
-                    "original": "couple of pinches red pepper flakes, optional",
-                    "originalName": "couple of red pepper flakes, optional",
-                    "unit": "pinches"
-                },
-                {
-                    "aisle": "Spices and Seasonings",
-                    "amount": 2.0,
-                    "consitency": "solid",
-                    "id": 1102047,
-                    "image": "salt-and-pepper.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 2.0,
-                            "unitLong": "servings",
-                            "unitShort": "servings"
-                        },
-                        "us": {
-                            "amount": 2.0,
-                            "unitLong": "servings",
-                            "unitShort": "servings"
-                        }
-                    },
-                    "meta": [
-                        "to taste"
-                    ],
-                    "name": "salt and pepper",
-                    "original": "salt and pepper, to taste",
-                    "originalName": "salt and pepper, to taste",
-                    "unit": "servings"
-                },
-                {
-                    "aisle": "Produce",
-                    "amount": 3.0,
-                    "consitency": "solid",
-                    "id": 11291,
-                    "image": "spring-onions.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 3.0,
-                            "unitLong": "",
-                            "unitShort": ""
-                        },
-                        "us": {
-                            "amount": 3.0,
-                            "unitLong": "",
-                            "unitShort": ""
-                        }
-                    },
-                    "meta": [
-                        "white",
-                        "green",
-                        "separated",
-                        "chopped"
-                    ],
-                    "name": "scallions",
-                    "original": "3 scallions, chopped, white and green parts separated",
-                    "originalName": "scallions, chopped, white and green parts separated",
-                    "unit": ""
-                },
-                {
-                    "aisle": "Alcoholic Beverages",
-                    "amount": 2.0,
-                    "consitency": "liquid",
-                    "id": 14106,
-                    "image": "white-wine.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 2.0,
-                            "unitLong": "Tbsps",
-                            "unitShort": "Tbsps"
-                        },
-                        "us": {
-                            "amount": 2.0,
-                            "unitLong": "Tbsps",
-                            "unitShort": "Tbsps"
-                        }
-                    },
-                    "meta": [
-                        "white"
-                    ],
-                    "name": "white wine",
-                    "original": "2-3 tbsp white wine",
-                    "originalName": "white wine",
-                    "unit": "tbsp"
-                },
-                {
-                    "aisle": "Pasta and Rice",
-                    "amount": 0.25,
-                    "consitency": "solid",
-                    "id": 99025,
-                    "image": "breadcrumbs.jpg",
-                    "measures": {
-                        "metric": {
-                            "amount": 59.147,
-                            "unitLong": "milliliters",
-                            "unitShort": "ml"
-                        },
-                        "us": {
-                            "amount": 0.25,
-                            "unitLong": "cups",
-                            "unitShort": "cups"
-                        }
-                    },
-                    "meta": [
-                        "whole wheat",
-                        "(I used panko)"
-                    ],
-                    "name": "whole wheat bread crumbs",
-                    "original": "1/4 cup whole wheat bread crumbs (I used panko)",
-                    "originalName": "whole wheat bread crumbs (I used panko)",
-                    "unit": "cup"
-                }
-            ],
-            "summary": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire. One portion of this dish contains approximately <b>19g of protein </b>,  <b>20g of fat </b>, and a total of  <b>584 calories </b>. For  <b>$1.63 per serving </b>, this recipe  <b>covers 23% </b> of your daily requirements of vitamins and minerals. This recipe serves 2. It is brought to you by fullbellysisters.blogspot.com. 209 people were glad they tried this recipe. A mixture of scallions, salt and pepper, white wine, and a handful of other ingredients are all it takes to make this recipe so scrumptious. From preparation to the plate, this recipe takes approximately  <b>45 minutes </b>. All things considered, we decided this recipe  <b>deserves a spoonacular score of 83% </b>. This score is awesome. If you like this recipe, take a look at these similar recipes: <a href=\"https://spoonacular.com/recipes/cauliflower-gratin-with-garlic-breadcrumbs-318375\">Cauliflower Gratin with Garlic Breadcrumbs</a>, < href=\"https://spoonacular.com/recipes/pasta-with-cauliflower-sausage-breadcrumbs-30437\">Pasta With Cauliflower, Sausage, & Breadcrumbs</a>, and <a href=\"https://spoonacular.com/recipes/pasta-with-roasted-cauliflower-parsley-and-breadcrumbs-30738\">Pasta With Roasted Cauliflower, Parsley, And Breadcrumbs</a>.",
-            "winePairing": {
-                "pairedWines": [
-                    "chardonnay",
-                    "gruener veltliner",
-                    "sauvignon blanc"
-                ],
-                "pairingText": "Chardonnay, Gruener Veltliner, and Sauvignon Blanc are great choices for Pasta. Sauvignon Blanc and Gruner Veltliner both have herby notes that complement salads with enough acid to match tart vinaigrettes, while a Chardonnay can be a good pick for creamy salad dressings. The Buddha Kat Winery Chardonnay with a 4 out of 5 star rating seems like a good match. It costs about 25 dollars per bottle.",
-                "productMatches": [
-                    {
-                        "id": 469199,
-                        "title": "Buddha Kat Winery Chardonnay",
-                        "description": "We barrel ferment our Chardonnay and age it in a mix of Oak and Stainless. Giving this light bodied wine modest oak character, a delicate floral aroma, and a warming finish.",
-                        "price": "$25.0",
-                        "imageUrl": "https://spoonacular.com/productImages/469199-312x231.jpg",
-                        "averageRating": 0.8,
-                        "ratingCount": 1.0,
-                        "score": 0.55,
-                        "link": "https://www.amazon.com/2015-Buddha-Kat-Winery-Chardonnay/dp/B00OSAVVM4?tag=spoonacular-20"
-                    }
-                ]
-            }
-        }
-    ])
-    // const [triggerNames, setTriggerNames] = useState(["Breakfast", "Lunch", "Dinner", "Dessert", "Snacks"])
+    const [generateText, setGenerateText] = useState("Generate meal plan")
+
+    // if no result, render message to generate plan
+    // if result, render meal plan
+    const stateMealRecipes = useSelector(state => state.meal_plan_recipes)
+    const stateUsersRecipesHistory = useSelector(state => state.users_recipe_history)
+    const stateBudgets = useSelector(state => state.user_budget)
+    const stateCalories = useSelector(state => state.user_calorie_limits)
+    console.log("state budgets", stateBudgets)
+    console.log("state meal plan recipes at render", stateMealRecipes)
 
     const stateRecipes = useSelector(state => state.recipes)
-    console.log(stateRecipes.dinner.length)
+    console.log("state recipes at render", stateRecipes)
+
+    let viewedRecipes = []
+
+    let newRecipes = { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: [] }
+
+    let newMealPlan = { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: [] }
+
+    //TODO:get from state
+    let meals = useSelector(state => state.user_meals)
+    console.log(meals)
+    // let meals = { breakfast: true, lunch: false, dinner: false, dessert: false, snacks: false }
+
+    //TODO:get from state
+    let intoleranes = ["eggs", "milk"]
+    let intolerancesParamsOld = ""
+    for (let i = 0; i < intoleranes.length; i++) {
+        intolerancesParamsOld += `,${intoleranes[i]}`
+    }
+    let intolerancesParams = intolerancesParamsOld.substring(1)
+
+    //TODO:get from state
+    let diet = { vegan: false, vegetarian: false, glutenFree: false, ketogenic: false, pescetarian: false, paleo: false }
+
+    let dietParamsOld = ""
+    for (let i = 0; i < Object.keys(diet).length; i++) {
+        if (Object.values(diet)[i] === true) {
+            dietParamsOld += `,${Object.keys(diet)[i]}`
+            console.log(dietParamsOld)
+        }
+    }
+    let dietParams = dietParamsOld.substring(1)
+
+    const getInitialMeal = async (meal) => {
+        const { data } = await axios.get(`https://api.spoonacular.com/recipes/random/?apiKey=${apiKey}&number=100&tags=${meal},${dietParams}&intolerances=${intolerancesParams}&excludeIngredients${intolerancesParams}&includeNutrition=true&instructionsRequired=true`)
+        console.log("data", data.recipes)
+        const retrievedRecipes = data.recipes
+        let shortRetrievedRecipes = []
+        let formattedRetrievedRecipes = []
+        let thisMealsRecipesInMealPlan = []
+        for (let i = 0; i < retrievedRecipes.length; i++) {
+            if(retrievedRecipes[i].pricePerServing < stateBudgets[meal]*100){
+                shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
+                formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            thisMealsRecipesInMealPlan.push(formattedRetrievedRecipes[i])
+            viewedRecipes.push(formattedRetrievedRecipes[i].id)
+            formattedRetrievedRecipes.splice([i], 1)
+        }
+        if (meal === "breakfast") {
+            newRecipes = { ...newRecipes, breakfast: formattedRetrievedRecipes }
+            newMealPlan = { ...newMealPlan, breakfast: thisMealsRecipesInMealPlan }
+        }
+        if (meal === "lunch") {
+            newRecipes = { ...newRecipes, lunch: formattedRetrievedRecipes }
+            newMealPlan = { ...newMealPlan, lunch: thisMealsRecipesInMealPlan }
+        }
+        if (meal === "dinner") {
+            newRecipes = { ...newRecipes, dinner: formattedRetrievedRecipes }
+            newMealPlan = { ...newMealPlan, dinner: thisMealsRecipesInMealPlan }
+        }
+        if (meal === "dessert") {
+            newRecipes = { ...newRecipes, dessert: formattedRetrievedRecipes }
+            newMealPlan = { ...newMealPlan, dessert: thisMealsRecipesInMealPlan }
+        }
+        if (meal === "snacks") {
+            newRecipes = { ...newRecipes, snacks: formattedRetrievedRecipes }
+            newMealPlan = { ...newMealPlan, snacks: thisMealsRecipesInMealPlan }
+        }
+        console.log("meal's recipes in meal plan after call", thisMealsRecipesInMealPlan)
+    }
+    const getAdditionalMeal = async (meal) => {
+        const { data } = await axios.get(`https://api.spoonacular.com/recipes/random/?apiKey=${apiKey}&number=25&tags=${meal},${dietParams}&intolerances=${intolerancesParams}&excludeIngredients${intolerancesParams}&includeNutrition=true&instructionsRequired=true`)
+        console.log("data", data.recipes)
+        const retrievedRecipes = data.recipes
+        let shortRetrievedRecipes = []
+        let formattedRetrievedRecipes = []
+        for (let i = 0; i < retrievedRecipes.length; i++) {
+            shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
+            formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+        }
+        if (meal === "breakfast") {
+            newRecipes = { ...newRecipes, breakfast: formattedRetrievedRecipes }
+        }
+        if (meal === "lunch") {
+            newRecipes = { ...newRecipes, lunch: formattedRetrievedRecipes }
+        }
+        if (meal === "dinner") {
+            newRecipes = { ...newRecipes, dinner: formattedRetrievedRecipes }
+        }
+        if (meal === "dessert") {
+            newRecipes = { ...newRecipes, dessert: formattedRetrievedRecipes }
+        }
+        if (meal === "snacks") {
+            newRecipes = { ...newRecipes, snacks: formattedRetrievedRecipes }
+        }
+        console.log("new recipes after additional meal call", newRecipes)
+    }
+
+    let unlockedMeals = [[], [], [], [], []]
+
+
+    const getMeals = async (e) => {
+        e.preventDefault()
+
+        // checks to see if a recipe is locked, if not it is added to unlocked array
+        let numberOfUnlocked = 0
+        for (let i = 0; i < Object.keys(meals).length; i++) {
+            for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                if (Object.values(stateMealRecipes)[i][j].lock === false) {
+                    unlockedMeals[i].push(Object.values(stateMealRecipes)[i][j].id)
+                    numberOfUnlocked += 1
+                }
+            }
+        }
+        console.log(numberOfUnlocked)
+        console.log("unlocked meals", unlockedMeals)
+
+        for (let i = 0; i < Object.keys(meals).length; i++) {
+            if (numberOfUnlocked === 0 && Object.values(meals)[i] === true) {
+                if (Object.keys(meals)[i] === "breakfast") {
+                    await getInitialMeal("breakfast")
+                }
+                if (Object.keys(meals)[i] === "lunch") {
+                    await getInitialMeal("lunch")
+                }
+                if (Object.keys(meals)[i] === "dinner") {
+                    await getInitialMeal("dinner")
+                }
+                if (Object.keys(meals)[i] === "dessert") {
+                    await getInitialMeal("dessert")
+                }
+                if (Object.keys(meals)[i] === "snacks") {
+                    await getInitialMeal("snacks")
+                }
+            } else if (unlockedMeals[i].length === 0 && Object.values(meals)[i] === true) {
+                if (Object.keys(meals)[i] === "breakfast") {
+                    newMealPlan = { ...newMealPlan, breakfast: Object.values(stateMealRecipes)[i] }
+                    newRecipes = { ...newRecipes, breakfast: Object.values(stateRecipes)[i] }
+                }
+                if (Object.keys(meals)[i] === "lunch") {
+                    newMealPlan = { ...newMealPlan, lunch: Object.values(stateMealRecipes)[i] }
+                    newRecipes = { ...newRecipes, lunch: Object.values(stateRecipes)[i] }
+                }
+                if (Object.keys(meals)[i] === "dinner") {
+                    newMealPlan = { ...newMealPlan, dinner: Object.values(stateMealRecipes)[i] }
+                    newRecipes = { ...newRecipes, dinner: Object.values(stateRecipes)[i] }
+                }
+                if (Object.keys(meals)[i] === "dessert") {
+                    newMealPlan = { ...newMealPlan, dessert: Object.values(stateMealRecipes)[i] }
+                    newRecipes = { ...newRecipes, dessert: Object.values(stateRecipes)[i] }
+                }
+                if (Object.keys(meals)[i] === "snacks") {
+                    newMealPlan = { ...newMealPlan, snacks: Object.values(stateMealRecipes)[i] }
+                    newRecipes = { ...newRecipes, snacks: Object.values(stateRecipes)[i] }
+                }
+            } else if (unlockedMeals[i].length > 0 && Object.values(meals)[i] === true && unlockedMeals[i].length <= Object.values(stateRecipes)[i].length) {
+                for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                    if (Object.values(stateMealRecipes)[i][j].lock === false) {
+                        Object.values(stateMealRecipes)[i][j] = Object.values(stateRecipes)[i][0]
+                        Object.values(stateRecipes)[i].splice(0, 1)
+                        console.log("state recipes after unlocked replaced", stateRecipes)
+                        if (Object.keys(meals)[i] === "breakfast") {
+                            newMealPlan = { ...newMealPlan, breakfast: Object.values(stateMealRecipes)[i] }
+                            newRecipes = { ...newRecipes, breakfast: Object.values(stateRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "lunch") {
+                            newMealPlan = { ...newMealPlan, lunch: Object.values(stateMealRecipes)[i] }
+                            newRecipes = { ...newRecipes, lunch: Object.values(stateRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "dinner") {
+                            newMealPlan = { ...newMealPlan, dinner: Object.values(stateMealRecipes)[i] }
+                            newRecipes = { ...newRecipes, dinner: Object.values(stateRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "dessert") {
+                            newMealPlan = { ...newMealPlan, dessert: Object.values(stateMealRecipes)[i] }
+                            newRecipes = { ...newRecipes, dessert: Object.values(stateRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "snacks") {
+                            newMealPlan = { ...newMealPlan, snacks: Object.values(stateMealRecipes)[i] }
+                            newRecipes = { ...newRecipes, snacks: Object.values(stateRecipes)[i] }
+                        }
+                        console.log(newRecipes)
+                    }
+                }
+            } else if (unlockedMeals[i].length > 0 && Object.values(meals)[i] === true && unlockedMeals[i].length > Object.values(stateRecipes)[i].length) {
+                if (Object.keys(meals)[i] === "breakfast") {
+                    await getAdditionalMeal("breakfast")
+                }
+                if (Object.keys(meals)[i] === "lunch") {
+                    await getAdditionalMeal("lunch")
+                }
+                if (Object.keys(meals)[i] === "dinner") {
+                    await getAdditionalMeal("dinner")
+                }
+                if (Object.keys(meals)[i] === "dessert") {
+                    await getAdditionalMeal("dessert")
+                }
+                if (Object.keys(meals)[i] === "snacks") {
+                    await getAdditionalMeal("snacks")
+                }
+                for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                    if (Object.values(stateMealRecipes)[i][j].lock === false) {
+                        console.log(Object.values(newRecipes)[i])
+                        Object.values(stateMealRecipes)[i][j] = Object.values(newRecipes)[i][0]
+                        Object.values(newRecipes)[i].splice(0, 1)
+                        console.log(Object.values(newRecipes)[i])
+                        console.log("state recipes after unlocked replaced", stateRecipes)
+                        if (Object.keys(meals)[i] === "breakfast") {
+                            newMealPlan = { ...newMealPlan, breakfast: Object.values(stateMealRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "lunch") {
+                            newMealPlan = { ...newMealPlan, lunch: Object.values(stateMealRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "dinner") {
+                            newMealPlan = { ...newMealPlan, dinner: Object.values(stateMealRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "dessert") {
+                            newMealPlan = { ...newMealPlan, dessert: Object.values(stateMealRecipes)[i] }
+                        }
+                        if (Object.keys(meals)[i] === "snacks") {
+                            newMealPlan = { ...newMealPlan, snacks: Object.values(stateMealRecipes)[i] }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        console.log("new recipes after getMeals", newRecipes)
+        console.log("new meal plan after getMeals", newMealPlan)
+
+        dispatch({ type: "SET RECIPES", payload: newRecipes })
+        dispatch({ type: "SET VIEWED RECIPES", payload: viewedRecipes })
+        dispatch({ type: "SET MEAL PLAN RECIPES", payload: newMealPlan })
+    }
+
+
+
+
+
+
+    //TODO:generate shopping list
+    let shoppingList
+    const sendShoppingItems = async (shoppingItems) => {
+        const options = {
+            "items": shoppingItems
+        }
+        const { data } = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
+        console.log(data)
+        shoppingList = data
+    }
+    const generateShoppingList = async (e) => {
+        e.preventDefault()
+        // take in all items from recipes
+        // send to api with structure of 
+        // {
+        //     "items": [
+        //         "4 lbs tomatoes",
+        //         "10 tomatoes",
+        //         "20 Tablespoons Olive Oil",
+        //         "6 tbsp Olive Oil"
+        //     ]
+        // }
+        let items = []
+        //extracts all ingredients from all the recipes in the meal plan
+        for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
+            if (Object.values(stateMealRecipes)[i].length) {
+                for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                    for (let k = 0; k < Object.values(stateMealRecipes)[i][j].extendedIngredients.length; k++) {
+                        let ingredientName = Object.values(stateMealRecipes)[i][j].extendedIngredients[k].name
+                        let ingredientMeasureAmount = Object.values(stateMealRecipes)[i][j].extendedIngredients[k].measures.us.amount
+                        let ingredientMeasureUnit = Object.values(stateMealRecipes)[i][j].extendedIngredients[k].measures.us.unitShort
+                        let itemString = `${ingredientMeasureAmount} ${ingredientMeasureUnit} ${ingredientName}`
+                        items.push(itemString)
+                        console.log(itemString)
+                        console.log(items)
+                    }
+                }
+            }
+        }
+        await sendShoppingItems(items)
+
+        dispatch({ type: "SET SHOPPING LIST", payload: shoppingList })
+
+        navigate('/shoppinglist')
+    }
+
+
+
+    //TODO:submit meal plan
+    // take in all id's, titles, and faves
+    // add to array
+    // send to db
+
+    const submitMealPlan = async (e) => {
+        e.preventDefault()
+
+        let recipesToSendToDb = { today_date: "", recipes: { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: []}}
+        for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
+            for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                let currentRecipe = Object.values(stateMealRecipes)[i][j]
+                currentRecipe.lock = true
+                let mealEntry = {id: `${currentRecipe.id}`, title: currentRecipe.title, image: currentRecipe.image, fave: currentRecipe.fave}
+                if(Object.keys(stateMealRecipes)[i] === "breakfast"){
+                    recipesToSendToDb.recipes.breakfast.push(mealEntry)
+                }
+                if(Object.keys(stateMealRecipes)[i] === "lunch"){
+                    recipesToSendToDb.recipes.lunch.push(mealEntry)
+                }
+                if(Object.keys(stateMealRecipes)[i] === "dinner"){
+                    recipesToSendToDb.recipes.dinner.push(mealEntry)
+                }
+                if(Object.keys(stateMealRecipes)[i] === "dessert"){
+                    recipesToSendToDb.recipes.dessert.push(mealEntry)
+                }
+                if(Object.keys(stateMealRecipes)[i] === "snacks"){
+                    recipesToSendToDb.recipes.snacks.push(mealEntry)
+                }
+            }
+            console.log(recipesToSendToDb)
+        }
+        dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' +  yyyy;
+        console.log(today)
+        recipesToSendToDb.today_date = today
+        console.log(recipesToSendToDb)
+        const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/mealhistory/`, JSON.stringify(recipesToSendToDb))
+        console.log(data)
+        stateUsersRecipesHistory.unshift(recipesToSendToDb)
+        //confirmation message saying can now view shopping list
+        
+        setGenerateText("Generate new meal plan")
+    }
+
+
+
     return (
         <>
-        <h1>Meal Plan</h1>
-        {stateRecipes.breakfast.length > 0 && (
-            <CollapsibleRecipes recipes={recipes} triggerName="Breakfast"/>
-        )}
-        {stateRecipes.lunch.length > 0 && (
-            <CollapsibleRecipes recipes={recipes} triggerName="Lunch"/>
-        )}
-        {stateRecipes.dinner.length > 0 && (
-            <CollapsibleRecipes recipes={recipes} triggerName="Dinner"/>
-        )}
-        {stateRecipes.dessert.length > 0 && (
-            <CollapsibleRecipes recipes={recipes} triggerName="Dessert"/>
-        )}
-        {stateRecipes.snack.length > 0 && (
-            <CollapsibleRecipes recipes={recipes} triggerName="Snacks"/>
-        )}
+            <h1>Meal Plan</h1>
+            <div className="generateMeal">
+                <button onClick={getMeals}>{generateText}</button>
+            </div>
+            <div className="shoppingListBtn">
+                <button onClick={generateShoppingList}>Shopping list</button>
+            </div>
+            <div className="recipesMealPlan">
+
+                {stateMealRecipes.breakfast.length > 0 && (
+                    <CollapsibleRecipes meal={"breakfast"} fullRecipes={stateMealRecipes} triggerName="Breakfast" page="mealplan"/>
+                )}
+                {stateMealRecipes.lunch.length > 0 && (
+                    <CollapsibleRecipes meal={"lunch"} fullRecipes={stateMealRecipes} triggerName="Lunch" page="mealplan"/>
+                )}
+                {stateMealRecipes.dinner.length > 0 && (
+                    <CollapsibleRecipes meal={"dinner"} fullRecipes={stateMealRecipes} triggerName="Dinner" page="mealplan"/>
+                )}
+                {stateMealRecipes.dessert.length > 0 && (
+                    <CollapsibleRecipes meal={"dessert"} fullRecipes={stateMealRecipes} triggerName="Dessert" page="mealplan"/>
+                )}
+                {stateMealRecipes.snacks.length > 0 && (
+                    <CollapsibleRecipes meal={"snacks"} fullRecipes={stateMealRecipes} triggerName="Snacks" page="mealplan"/>
+                )}
+            </div>
+            <div className="submitMealPlan" onClick={submitMealPlan}>Submit meal plan</div>
         </>
     )
 };

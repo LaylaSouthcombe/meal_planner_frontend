@@ -1,0 +1,21 @@
+.preferences-box {
+  background-color: gray;
+}
+
+
+*/ #p {
+  display: none;
+  color: green;
+}
+
+input[type=checkbox]:checked+.toggle-section {
+  /* color: #f00;
+    background-color: #f00; */
+  font-style: normal;
+  visibility: visible;
+
+}
+
+.meals-section>.toggle-section {
+  visibility: hidden;
+}
