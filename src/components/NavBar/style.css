@@ -18,12 +18,12 @@ header {
     display: none;
 }
 
-.navBar>li {
+.navBar > li {
     padding: 1.5vw;
     margin-top: 5vh;
 }
 
-.navBar>li>a {
+.navBar > li > a {
     cursor: pointer
 }
 
@@ -33,7 +33,7 @@ header {
     width: 100%;
 }
 
-.sideNavBar>li>a {
+.sideNavBar > li >a {
     cursor: pointer
 }
 
@@ -49,7 +49,7 @@ header {
     padding-top: 20vh;
 }
 
-.sideNavBar>li {
+.sideNavBar > li {
     list-style-type: none;
     padding: 5px;
     padding-top: 5%;
@@ -72,7 +72,7 @@ header {
     background-color: #041129;
 }
 
-.navIcon>i {
+.navIcon > li {
     font-size: 30px;
     color: #FF0A78;
 }
@@ -88,16 +88,16 @@ header {
         padding-top: 22vh;
     }
 
-    .sideNavBar>li {
+    .sideNavBar > li {
         padding: 15px;
         padding-left: 15%;
     }
 
-    .navIcon>i {
+    .navIcon > li {
         font-size: 50px;
     }
 
-    .sideNavBar>li:last-child {
+    .sideNavBar > li:last-child {
         margin-top: 20px;
     }
 }
@@ -111,7 +111,7 @@ header {
         padding-top: 20vh;
     }
 
-    .sideNavBar>li {
+    .sideNavBar > li {
         padding: 25px;
         padding-top: 5%;
         padding-left: 20%;
@@ -123,7 +123,7 @@ header {
         padding-top: 22vh;
     }
 
-    .sideNavBar>li:last-child {
+    .sideNavBar > li:last-child {
         margin-top: 30px;
     }
 }
@@ -139,7 +139,7 @@ header {
         height: 100vh;
     }
 
-    .sideNavBar>li {
+    .sideNavBar > li {
         font-size: 1.75em;
     }
 
@@ -147,7 +147,7 @@ header {
         padding-top: 20vh;
     }
 
-    .sideNavBar>li:last-child {
+    .sideNavBar > li:last-child {
         margin-top: 30px;
     }
 }
@@ -177,7 +177,7 @@ header {
         display: flex;
     }
 
-    .navBar>li {
+    .navBar > li {
         padding: 15px;
         margin-top: 55px;
         font-size: 1.15em;

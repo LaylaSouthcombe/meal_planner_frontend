@@ -3,10 +3,6 @@
 }
 
 
-*/ #p {
-  display: none;
-  color: green;
-}
 
 input[type=checkbox]:checked+.toggle-section {
   /* color: #f00;
