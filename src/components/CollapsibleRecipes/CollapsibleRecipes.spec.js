@@ -80,6 +80,11 @@ describe("Meal plan fave function", () => {
     fireEvent.click(unfave);
     expect(unfave.classList).toContain("faved");
   });
+  test("it filters out faved recipes", () => {
+    const recipe = screen.getByTestId("recipe");
+    fireEvent.click(recipe);
+    expect(navigate).toHaveBeenCalledWith("/recipe");
+  });
 })
 
 

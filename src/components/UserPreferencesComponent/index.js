@@ -240,7 +240,7 @@ const UserPreferenceComponent = () => {
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="dessert-calories" name="dessert" />
               </label> */}
             </div>
-            <button type="submit">submit prefs</button>
+            <button type="submit" data-testid="sendPrefs">submit prefs</button>
           </div>
         </form>
       </div>

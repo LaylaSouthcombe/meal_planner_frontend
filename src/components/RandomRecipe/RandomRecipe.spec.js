@@ -1,23 +1,36 @@
-import  React from 'react';
-import "@testing-library/jest-dom";
-import{screen,render} from "@testing-library/react"
+import React from 'react';
 import RandomRecipe from './index';
-import { MemoryRouter } from "react-router-dom";
-import '@testing-library/jest-dom/extend-expect';
+import { Provider } from "react-redux";
+import { screen, render, fireEvent } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import * as router from "react-router";
+import store from "../../store";
+import "@testing-library/jest-dom";
 
 
-describe("Renders Footer elements", () =>{
+
+describe("Renders random recipe", () =>{
 
     beforeEach(() => {
-        render(<RandomRecipe />)
+        render(
+            <Provider store={store}>
+              <Router>
+                <RandomRecipe />
+              </Router>
+            </Provider>
+          )
     })
     
-    test("Render li element",()=>{
-        const li = screen.getByRole('link',{name:"Layla Southcombe"})
-        expect(li).toBeInTheDocument()
-        expect(li.textContent).toBe('LaylaSouthcombe')
-    })
-
-    
-    })
+    // test("Render li element",()=>{
+    //     const li = screen.getByRole('link',{name:"Layla Southcombe"})
+    //     expect(li).toBeInTheDocument()
+    //     expect(li.textContent).toBe('LaylaSouthcombe')
+    // })
+    it("returns correct result handleSignIn", async () => {
+        RandomRecipe.viewRecipe = jest.fn()          
+          const viewRecipe = await screen.findByTestId(/viewRecipe/i)
+          fireEvent.click(viewRecipe)
+        expect(RandomRecipe.viewRecipe.mock).toBeTruthy();
+      });
+})
     

@@ -46,6 +46,18 @@ describe("Fact axios", () => {
       // const response = await waitFor(() => screen.getAllByTestId(/randomFact/i))
       // expect(response).toHaveLength(1)
       const resp = { data: [{ name: 'FooBar' }]};
-     axios.get.mockImplementation(() => Promise.resolve(resp));
+      axios.get.mockImplementation(() => Promise.resolve(resp));
+  });
+  it("returns correct result getMealsBtn", async () => {
+    renderWithProviders(<Fact />, {
+      reduxState: {
+        random_fact: "fact.",
+        random_recipe: { title: "no recipe" }
+      }
+    });
+    Fact.fetchFact = jest.fn()        
+      // const getMealsBtn = await screen.findByTestId(/getMealsBtn/i)
+      // fireEvent.click(getMealsBtn)
+    expect(Fact.fetchFact.mock).toBeTruthy();
   });
 })

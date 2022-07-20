@@ -44,22 +44,7 @@ const LoginComponent = () => {
     dispatch({ type: "SET USER BUDGETS", payload: budgetObj });
     dispatch({ type: "SET USER MEALS", payload: userMeals });
   }
-  //   [
-  //     {
-  //         "calories_limit": "{'breakfast': 500, 'lunch': 600, 'dinner': 700, 'snack': 200, 'dessert': 0}",
-  //         "intolorences": [
-  //             "dairy"
-  //         ],
-  //         "budget": "{'breakfast': 2, 'lunch': 2, 'dinner': 3, 'snack': 2, 'dessert': 0}"
-  //     },
-  //     {
-  //         "breakfast": true,
-  //         "lunch": true,
-  //         "dinner": true,
-  //         "dessert": false,
-  //         "snack": true
-  //     }
-  // ]
+
   const handleSignIn = async (e) => {
     e.preventDefault();
 
@@ -69,7 +54,6 @@ const LoginComponent = () => {
         setErrorVisibility("visible");
         setError("Fields should not be empty");
       } else {
-        //login
         await axios.post(
           `${backendUrl}${route}`,
           JSON.stringify({ email, password }),
@@ -77,7 +61,6 @@ const LoginComponent = () => {
             headers: { "Content-Type": "application/json" },
           }
         );
-        //get meal history
         await getUserMealHistory()
         //TODO: set to history state
         //TODO: set first in array to meal plane
@@ -163,7 +146,7 @@ const LoginComponent = () => {
           data-testid="passwordInput"
           className="signPassword"
         />
-        <button className="Login">Login</button>
+        <button data-testid="loginBtn" className="Login">Login</button>
         <button
           className="haveAccount"
           data-testid="button1"

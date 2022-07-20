@@ -1,5 +1,5 @@
 import { default as LoginComponent } from ".";
-import { screen, render, fireEvent, waitFor } from "@testing-library/react";
+import { screen, render, fireEvent, waitFor, fakeEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as router from "react-router";
 import { Provider } from "react-redux";
@@ -104,4 +104,17 @@ describe("LoginComponent", () => {
     await waitFor(() => expect(navigate).toHaveBeenCalledWith("/MealPlan"));
     // expect(form).toBe("/MealPlan");
   });
+  it("returns correct result handleSignIn", async () => {
+    render(correct);
+    LoginComponent.handleSignIn = jest.fn()      
+    LoginComponent.getUserMealHistory = jest.fn()   
+    LoginComponent.getUserPreferences = jest.fn()     
+      const loginBtn = await screen.findByTestId(/loginBtn/i)
+      fireEvent.click(loginBtn)
+    expect(LoginComponent.handleSignIn.mock).toBeTruthy();
+    expect(LoginComponent.getUserMealHistory.mock).toBeTruthy();
+    expect(LoginComponent.getUserPreferences.mock).toBeTruthy();
+
+  });
+
 });

@@ -117,6 +117,7 @@ describe("NavBar", () => {
     expect(side2).toHaveStyle("display: block");
   });
 
+
 });
 
 describe("api Navbar", () => {

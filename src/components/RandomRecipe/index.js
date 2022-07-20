@@ -83,7 +83,7 @@ console.log(randomRecipe)
     return (
       <>
         {stateRandomRecipe.title !== 'no recipe' && 
-          (<div className={"randomRecipeContainer " + stateRandomRecipe.id} onClick={viewRecipe} id={stateRandomRecipe.id}>
+          (<div data-testid="viewRecipe"className={"randomRecipeContainer " + stateRandomRecipe.id} onClick={viewRecipe} id={stateRandomRecipe.id}>
             <h3>Recipe of the day</h3>
             <div className={"randomRecipe " + stateRandomRecipe.id}>
               <div className={"randomRecipeImg " + stateRandomRecipe.id}>
