@@ -280,7 +280,7 @@ const MealPlan = () => {
         const options = {
             "items": shoppingItems
         }
-        const {data} = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
+        const data = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
         console.log(data)
         shoppingList = data
     }
