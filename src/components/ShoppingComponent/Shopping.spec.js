@@ -62,7 +62,7 @@ import '@testing-library/jest-dom/extend-expect';
         test("Render h1",()=>{
             const cost = screen.getByTestId(/cost/i)
             expect(cost).toBeInTheDocument()
-            expect(cost.textContent).toBe('Predicted cost: 30.23')
+            expect(cost.textContent).toBe('Predicted cost: £30.23')
         })
         it("returns correct result", () => {
             Shopping.createHtmlString = jest.fn()

@@ -3,6 +3,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+import "./style.css";
+
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -10,10 +14,12 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
+
   const [errorVisibility, setErrorVisibility] = useState("hidden");
 
   const backendUrl = "https://mealplannerserver.herokuapp.com/";
   const route = "createuser/";
+
 
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,6 +42,7 @@ const SignUp = () => {
         setError("Make sure password and confirm password match!");
       } else {
         // console.log({ name, email, password });
+
         await axios.post(
           `${backendUrl}${route}`,
           JSON.stringify({ name, email, password }),
@@ -43,6 +50,7 @@ const SignUp = () => {
             headers: { "Content-Type": "application/json" },
           }
         );
+
         dispatch({ type: "SET LOGIN OR REGISTER", payload: "register" });
         dispatch({ type: "SET EMAIL", payload: email });
         navigate("/MealPlan");
@@ -88,85 +96,89 @@ const SignUp = () => {
   };
   return (
     <>
-      <form
-        aria-label="login"
-        data-testid="form"
-        className="loginForm"
-        onSubmit={handleSignUp}
-      >
-        <h2 className="registerHeader">Create Account</h2>
-        <div
-          className="loginError"
-          data-testid="error"
-          style={{ visibility: errorVisibility }}
+      <h1 className="registerHeader">Create Account</h1>
+      <div className="signUp2">
+        <form
+          aria-label="login"
+          data-testid="form"
+          className="loginForm"
+          onSubmit={handleSignUp}
         >
-          {error && error}
+          <div
+            className="loginError"
+            data-testid="error"
+            style={{ visibility: errorVisibility }}
+          >
+            {error && error}
+          </div>
+          <label htmlFor="email" className="signEmailLabel">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autoFocus
+            placeholder="Email"
+            value={email}
+            onChange={onEmailChange}
+            data-testid="emailInput"
+            className="signEmail"
+          />
+          <label htmlFor="name" className="loginNameLabel">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            autoFocus
+            placeholder="name"
+            value={name}
+            onChange={onNameChange}
+            data-testid="nameInput"
+            className="signname"
+          />
+          <label htmlFor="password" className="signUpPasswordLabel">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            autoFocus
+            placeholder="Password"
+            value={password}
+            onChange={onPasswordChange}
+            data-testid="passwordInput"
+            className="signPassword"
+          />
+          <label htmlFor="confirmPassword" className="confirmPasswordLabel">
+            Confirm password
+          </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            autoFocus
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={onConfirmPasswordChange}
+            data-testid="confirmPasswordInput"
+            className="confirmPasswordInput"
+          />
+          <button className="signUp">Sign up</button>
+        </form>
+        <div className="btndiv2">
+          <button
+            className="haveAccount2"
+            data-testid="button1"
+            onClick={() => navigate("/Login")}
+          >
+            Already have an account?
+          </button>
         </div>
-        <label htmlFor="email" className="signEmailLabel">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          autoFocus
-          placeholder="Email"
-          value={email}
-          onChange={onEmailChange}
-          data-testid="emailInput"
-          className="signEmail"
-        />
-        <label htmlFor="name" className="loginNameLabel">
-          Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          autoFocus
-          placeholder="name"
-          value={name}
-          onChange={onNameChange}
-          data-testid="nameInput"
-          className="signname"
-        />
-        <label htmlFor="password" className="signUpPasswordLabel">
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          autoFocus
-          placeholder="Password"
-          value={password}
-          onChange={onPasswordChange}
-          data-testid="passwordInput"
-          className="signPassword"
-        />
-        <label htmlFor="confirmPassword" className="confirmPasswordLabel">
-          Confirm password
-        </label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          autoFocus
-          placeholder="Confirm password"
-          value={confirmPassword}
-          onChange={onConfirmPasswordChange}
-          data-testid="confirmPasswordInput"
-          className="confirmPasswordInput"
-        />
-        <button className="signUp">Sign up</button>
-        <button
-          className="haveAccount"
-          data-testid="button1"
-          onClick={() => navigate("/Login")}
-        >
-          Already have an account?
-        </button>
-      </form>
+      </div>
     </>
   );
 };

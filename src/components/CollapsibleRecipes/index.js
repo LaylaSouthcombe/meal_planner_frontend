@@ -71,7 +71,7 @@ const findRecipe = async (recipeId) => {
           e.style.display = "none"
         }
         else if (!favourited) {
-          e.style.display = "block"
+          e.style.display = "flex"
         }
       }
     }

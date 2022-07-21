@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Collapsible from 'react-collapsible';
 import { CollapsibleRecipes } from '../../components';
 
+import './style.css'
+
 const History = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -44,17 +46,21 @@ const History = () => {
 
     return (
         <>
-            <h1 data-testid="historyH1">History</h1>
+            <h1 data-testid="historyH1" className="historyH1">History</h1>
             {/* if the users history is same as initial state they are redirected to submit a meal plan */}
             {(userHistoryState[0].recipes.breakfast.length === 0 && userHistoryState[0].recipes.lunch.length === 0 && userHistoryState[0].recipes.dinner.length === 0 && userHistoryState[0].recipes.dessert.length === 0 && userHistoryState[0].recipes.snacks.length === 0) && (
-                <p >You have not submitted any meal plans yet, create one <span data-testId="navigateBtn" onClick={() => navigate('/mealplan')}>here</span></p>
+                <div className="noPreferences">
+                    <p >You have not submitted any meal plans yet, create one <span data-testId="navigateBtn" onClick={() => navigate('/mealplan')}>here</span></p>
+                </div>
             )}
             {/* if user has a meal plan history the code under renders, which returns a collapsible for each week, which each contain collapsibles for each meal type if they contain data */}
             {(userHistoryState[0].recipes.breakfast.length !== 0 || userHistoryState[0].recipes.lunch.length !== 0 || userHistoryState[0].recipes.dinner.length !== 0 || userHistoryState[0].recipes.dessert.length !== 0 || userHistoryState[0].recipes.snacks.length !== 0) && (
-                <button data-testid="faveBtn" onClick={(e) => {
-                    onBtnClick(e)
-                    console.log("this is from history " + favourited)
-                }}>{btnText}</button>
+                <div className="faveBtn">
+                    <button data-testid="faveBtn" onClick={(e) => {
+                        onBtnClick(e)
+                        console.log("this is from history " + favourited)
+                    }}>{btnText}</button>
+                </div>
             )}
             {(userHistoryState[0].recipes.breakfast.length !== 0 || userHistoryState[0].recipes.lunch.length !== 0 || userHistoryState[0].recipes.dinner.length !== 0 || userHistoryState[0].recipes.dessert.length !== 0 || userHistoryState[0].recipes.snacks.length !== 0) && (
                 userHistoryState.map((week, i) => {

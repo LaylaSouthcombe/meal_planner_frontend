@@ -1,0 +1,100 @@
+#aisle0,
+#aisle2,
+#aisle4,
+#aisle6,
+#aisle8,
+#aisle10,
+#aisle12,
+#aisle14 {
+    background-color: #EAEEEC;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+#h25 {
+    margin-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-size: 20px;
+    /* text-align: center; */
+}
+
+#tbody5 {
+    margin-left: 30px;
+}
+
+th {
+    font-size: 10px;
+    /* text-align: left; */
+}
+
+td {
+    font-size: 14px;
+}
+
+#aItem5 {
+    width: 100px;
+}
+
+#aItemMetric5 {
+    text-align: center;
+    width: 100px;
+}
+
+#aItemUS5 {
+    width: 80px;
+    text-align: center;
+}
+
+#aItemCost5 {
+    width: 10px;
+    text-align: center;
+}
+
+#cost5 {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+#shoppingBtnDiv5 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#shoppingBtn5 {
+    text-align: center;
+    font-size: 20px;
+    background-color: #F97F7F;
+    margin-top: 10px;
+    width: 200px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+}
+
+
+#emailP5 {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+#aTitle5 {
+    width: 100px;
+    font-size: 10px;
+}
+
+#aTitleMetric5 {
+    width: 100px;
+}
+
+#aTitleUS5 {
+    width: 80px;
+}
+
+#aTitleCost5 {
+    width: 10px;
+}

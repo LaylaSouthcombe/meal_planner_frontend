@@ -22,6 +22,7 @@ function App() {
       <header >
         <NavBar />
       </header>
+      <div className="content-container">
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="history" element={<History />} />
@@ -33,7 +34,8 @@ function App() {
         <Route path="preferences" element={<UserPreferences />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <footer >
+      </div>
+      <footer className="footer--pin">
         <Footer />
       </footer>
     </>

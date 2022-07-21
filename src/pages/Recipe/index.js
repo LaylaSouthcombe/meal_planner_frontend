@@ -64,10 +64,10 @@ const Recipe = () => {
     // console.log(recipe.fave)
     const setUnit = (e) => {
         console.log(e.target.id)
-        if(e.target.id === "metric"){
+        if (e.target.id === "metric") {
             stateMeasurementUnit = "us"
         }
-        if(e.target.id === "us"){
+        if (e.target.id === "us") {
             stateMeasurementUnit = "metric"
         }
         console.log(e.target.id)
@@ -79,7 +79,7 @@ const Recipe = () => {
             <>
                 <div data-testid="side" className="backButton" onClick={() => navigate(-1)}><img src={backArrow} alt="back button" /><p>Back</p></div>
                 <div className="recipeTitleDiv">
-                    <h1>{recipe.title}</h1>
+                    <h1 id="recipeTitle5">{recipe.title}</h1>
                     {recipe.fave === true && <div className="favedRecipePage" />}
                     {recipe.fave === false && <div className="unfavedRecipePage" />}
                 </div>
@@ -89,16 +89,19 @@ const Recipe = () => {
                         <li>Ready in <br /> {recipe.readyInMinutes} minutes</li>
                         <li>{recipe.servings} <br /> servings</li>
                     </ul>
-                    <div className="conversion" id={stateMeasurementUnit} onClick={setUnit}>
-                    {stateMeasurementUnit}</div>
+
                 </div>
                 <div className="recipeIngredients">
-                    <h2>Ingredient list</h2>
+                    <div id="ingredientTitleDiv5">
+                        <h2 id="ingredientList5">Ingredients</h2>
+                        <div className="conversion" id={stateMeasurementUnit} onClick={setUnit}>
+                            {stateMeasurementUnit}</div>
+                    </div>
                     <div className="ingredientsAndNutrition">
                         <ul className="ingredientsList">
                             {recipe.extendedIngredients.map(ingredient => {
                                 return (
-                                    <li>
+                                    <li id="unitList5">
                                         {stateMeasurementUnit === "metric" && (`${ingredient.measures.metric.amount} ${ingredient.measures.metric.unitShort} ${ingredient.name}`)}
                                         {stateMeasurementUnit === "us" && (`${ingredient.measures.us.amount} ${ingredient.measures.us.unitShort} ${ingredient.name}`)}
                                     </li>
@@ -112,25 +115,25 @@ const Recipe = () => {
                         </div>
                     </div>
                 </div>
-                <h2>Recipe Summary</h2>
+                <h2 id="recipeList5">Recipe Summary</h2>
                 <div className="recipeSummary">
-                    <div>{parse(recipe.summary)}</div>
+                    <div className="recipeSummary5">{parse(recipe.summary)}</div>
                     <div className="recipeImgDiv">
-                        <img src={recipe.image} alt="recipe image" />
+                        <img id="recipeImg5" src={recipe.image} alt="recipe image" />
                     </div>
                 </div>
-                <h2>Instructions</h2>
+                <h2 id="InstructionsList5">Instructions</h2>
                 <ol className="instructions">
                     {recipe.analyzedInstructions[0].steps.map(instruction => {
                         return (
-                            <li>
+                            <li id="recipeInstructions5">
                                 {instruction.step}
                             </li>
                         )
                     })}
                 </ol>
                 <div className="originalRecipe">
-                    <a href={recipe.sourceUrl} target="_blank">Veiw original recipe</a>
+                    <a id="recipelink5" href={recipe.sourceUrl} target="_blank">View original recipe</a>
                 </div>
             </>
         )}

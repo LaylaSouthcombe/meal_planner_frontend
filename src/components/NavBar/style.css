@@ -9,6 +9,13 @@ header {
     justify-content: right;
 }
 
+.sookiNavLog{
+    width: 150px;
+}
+.sookiNavLog > img {
+    width: 100%;
+    margin-top: 20px;
+}
 .active{
     font-weight: bold;
     border-bottom: 5px solid #EA5E5E !important;
@@ -18,24 +25,26 @@ header {
     display: none;
 }
 
-.navBar > li {
+.navBar>li {
     padding: 1.5vw;
     margin-top: 5vh;
 }
 
-.navBar > li > a {
+.navBar>li>a {
     cursor: pointer;
 }
+
 a:link {
     text-decoration: none;
 }
+
 .sidenav {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
 
-.sideNavBar > li >a {
+.sideNavBar>li>a {
     cursor: pointer;
     color: #19323B;
 }
@@ -52,7 +61,7 @@ a:link {
     padding-top: 20vh;
 }
 
-.sideNavBar > li {
+.sideNavBar>li {
     list-style-type: none;
     padding: 5px;
     padding-top: 5%;
@@ -68,11 +77,13 @@ a:link {
 
 .navIcon {
     z-index: 9999;
-    margin: 25px;
+    margin: 12.5px;
+    margin-right: 20px;
     padding: 10px 15px;
     background-color: #F97F7F;
     border: none;
     outline: none;
+    border-radius: 5px;
 }
 
 
@@ -86,16 +97,16 @@ a:link {
         padding-top: 22vh;
     }
 
-    .sideNavBar > li {
+    .sideNavBar>li {
         padding: 15px;
         padding-left: 15%;
     }
 
-    .navIcon > li {
+    .navIcon>li {
         font-size: 50px;
     }
 
-    .sideNavBar > li:last-child {
+    .sideNavBar>li:last-child {
         margin-top: 20px;
     }
 }
@@ -108,17 +119,19 @@ a:link {
     .sideNavBar {
         padding-top: 12vh;
     }
-    .navIcon > i{
+
+    .navIcon>i {
         font-size: 25px;
         width: 20px;
         color: #19323B;
     }
-    .sideNavBar > li {
+
+    .sideNavBar>li {
         padding: 15px;
         font-size: 1.25em;
     }
 
-    .sideNavBar > li:last-child {
+    .sideNavBar>li:last-child {
         margin-top: 30px;
     }
 }
@@ -134,7 +147,7 @@ a:link {
         height: 100vh;
     }
 
-    .sideNavBar > li {
+    .sideNavBar>li {
         font-size: 1.75em;
     }
 
@@ -142,7 +155,7 @@ a:link {
         padding-top: 20vh;
     }
 
-    .sideNavBar > li:last-child {
+    .sideNavBar>li:last-child {
         margin-top: 30px;
     }
 }
@@ -172,7 +185,7 @@ a:link {
         display: flex;
     }
 
-    .navBar > li {
+    .navBar>li {
         padding: 15px;
         margin-top: 55px;
         font-size: 1.15em;

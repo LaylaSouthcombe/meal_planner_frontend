@@ -65,3 +65,7 @@ body {
 .wrapper>* {
   grid-column: col-start / span 12;
 }
+
+.content-container {
+  min-height: calc(100vh - 155px);
+}

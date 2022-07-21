@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../../images/backArrow.png";
 
+import "./style.css";
+
 const PageNotFound = () => {
   const navigate = useNavigate();
 
@@ -16,7 +18,8 @@ const PageNotFound = () => {
         <p>Home</p>
       </div>
       <div className="notFound">
-        <h1>Opps! Page not found, let's return to home and try again</h1>
+        <h1>404</h1>
+        <h2>Opps! Page not found, let's return to home and try again :( </h2>
       </div>
     </>
   );
