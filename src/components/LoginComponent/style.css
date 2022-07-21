@@ -1,3 +1,70 @@
-body {
-  background: purple;
+.loginForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #b0c8bc;
+  border-radius: 15px;
+  width: 280px;
+  padding: 20px 20px;
+  height: fit-content;
+}
+
+.btndiv2 {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.login2 {
+  height: 620px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.haveAccount2 {
+  background-color: #f97f7f;
+  width: 200px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+}
+
+.loginForm > input {
+  height: 40px;
+  width: 260px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+input[type="text"]:focus {
+  border: 3px solid #555;
+}
+
+.loginForm > label {
+  display: block;
+  margin: 10px 0px;
+  width: fit-content;
+  font-size: 20px;
+  border: 10px;
+}
+
+.Login {
+  margin-top: 20px;
+  width: 200px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+}
+
+.loginError {
+  margin-top: 10px;
+  color: red;
+}
+
+.haveAccount2:hover {
+  background-color: blue;
 }

@@ -1,8 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-
+import { useSelector, useDispatch } from 'react-redux';
 import './style.css'
 import Collapsible from 'react-collapsible';
 
@@ -12,19 +11,53 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page }
   const dispatch = useDispatch()
   const navigate = useNavigate();
 console.log(page)
+const stateMealPlanRecipes = useSelector(state => state.meal_plan_recipes);
+    const stateRandomRecipe = useSelector(state => state.random_recipe);
+    const stateUserRecipeHistory = useSelector(state => state.users_recipe_history);
+    console.log(stateUserRecipeHistory)
+let recipe
+console.log(fullRecipes)
+const findRecipe = async (recipeId) => {
+  console.log(recipeId)
+  if (stateRandomRecipe.id === parseInt(recipeId)) {
+    recipe = stateRandomRecipe
+    console.log("random")
+  }
+  for (let i = 0; i < Object.keys(stateMealPlanRecipes).length; i++) {
+      for (let j = 0; j < Object.values(stateMealPlanRecipes)[i].length; j++) {
+          if (Object.values(stateMealPlanRecipes)[i][j].id === parseInt(recipeId)) {
+              recipe = Object.values(stateMealPlanRecipes)[i][j]
+              console.log("meal plan")
+          }
+          
+      }
+  }
+  for(let i = 0; i< stateUserRecipeHistory.length; i++){
+    for (let j = 0; j < Object.keys(stateUserRecipeHistory[i].recipes).length; j++) {
+      for (let k = 0; k < Object.values(stateUserRecipeHistory[i].recipes)[j].length; k++) {
+        if (Object.values(stateUserRecipeHistory[i].recipes)[j][k].id === recipeId) {
+          console.log("fetch")
+          const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=false`
+          const { data } = await axios.get(url)
+          console.log(data)
+          recipe = data
+      }
+    }
+  }
+}
+
+  
+  dispatch({ type: "SET RECIPE", payload: recipe })
+}
 
   const viewFullRecipe = async (e) => {
     const parentClassName = e.target.parentElement.className
     const splitString = parentClassName.split(' ')
     const recipeIdStr = splitString[1]
     const newRecipeId = parseInt(recipeIdStr)
+    console.log(newRecipeId)
     dispatch({ type: "SET RECIPE ID", payload: newRecipeId })
-    // if(page === "history") {
-    //   const url = `https://api.spoonacular.com/recipes/?apiKey=${apiKey}/${newRecipeId}/information?includeNutrition=false`
-    //   const { data } = await axios.get(url)
-    //   console.log(data)
-    //   dispatch({ type: "SET HISTORY RECIPE", payload: data })
-    // }
+    await findRecipe(recipeIdStr)
     navigate("/recipe")
   }
 

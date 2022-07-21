@@ -1,14 +1,15 @@
 export const initialState = {
     recipes: { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: [] },
     recipe_id: "12",
+    recipe: {},
     users_recipe_history: [
         {
-            date: "date", recipes: {
-                breakfast: [{ id: "", title: "", fave: "" }],
-                lunch: [{ id: "", title: "", fave: "" }],
-                dinner: [{ id: "", title: "", fave: "" }],
-                dessert: [{ id: "", title: "", fave: "" }],
-                snacks: [{ id: "", title: "fgdfgfd", fave: false }]
+            today_date: "date", recipes: {
+                breakfast: [],
+                lunch: [],
+                dinner: [],
+                dessert: [],
+                snacks: []
             }
         }
     ],
@@ -41,6 +42,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, recipes: action.payload }
         case "SET RECIPE ID":
             return { ...state, recipe_id: action.payload }
+        case "SET RECIPE":
+            return { ...state, recipe: action.payload }
         case "SET USER RECIPE HISTORY":
             return { ...state, users_recipe_history: action.payload }
         case "SET USER CALORIES":

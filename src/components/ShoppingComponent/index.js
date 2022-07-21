@@ -39,8 +39,8 @@ const createHtmlString = () => {
                                         <td>
                                         ${aisleItem.measures.us.amount} 
                                         ${aisleItem.measures.us.unit}</td>
-                                        <td>${aisleItem.cost}</td>
-                                        <td>${aisleItem.cost}</td>
+                                        <td>£${(aisleItem.cost/100).toFixed(2)}</td>
+                                        <td>£${(aisleItem.cost/100).toFixed(2)}</td>
                                     </tr>`)}
                                     
         }
@@ -57,7 +57,7 @@ const createHtmlString = () => {
         e.preventDefault()
         try {
             createHtmlString()
-            const message = {message: "Meal plan shopping list", html: `<style>h1 {color:pink}</style><h1>Your personalised meal plan shopping list is ready!</h1><div>${newHtmlString}</div><p>Predicted cost: ${shoppingList.cost}</p>`}
+            const message = {message: "Meal plan shopping list", html: `<style>h1 {color:pink}</style><h1>Your personalised meal plan shopping list is ready!</h1><div>${newHtmlString}</div><p>Predicted cost: £${(shoppingList.cost/100).toFixed(2)}</p>`}
             const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/email/`, JSON.stringify(message))
             console.log(data)
             setEmailMessageVisibility("visible")
@@ -89,7 +89,7 @@ const createHtmlString = () => {
                                             <td>{aisleItem.name}</td>
                                             <td>{aisleItem.measures.metric.amount} {aisleItem.measures.metric.unit}</td>
                                             <td>{aisleItem.measures.us.amount} {aisleItem.measures.us.unit}</td>
-                                            <td>{aisleItem.cost}</td>
+                                            <td>£{(aisleItem.cost/100).toFixed(2)}</td>
                                         </tr>
                                     )})}
                             </tbody>
@@ -97,7 +97,7 @@ const createHtmlString = () => {
                     </div>
                 </div>
             )})}
-        <p data-testid="cost">Predicted cost: {shoppingList.cost}</p>
+        <p data-testid="cost">Predicted cost: £{(shoppingList.cost / 100).toFixed(2)}</p>
         <div className="shoppingListButton">
                 <button className="emailShoppingList" data-testid="emailBtn" onClick={emailShopping}>Email me my shopping list</button>
         </div>

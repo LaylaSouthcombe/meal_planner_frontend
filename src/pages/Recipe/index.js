@@ -17,9 +17,9 @@ const Recipe = () => {
     const stateMealPlanRecipes = useSelector(state => state.meal_plan_recipes);
     const stateRandomRecipe = useSelector(state => state.random_recipe);
     let stateMeasurementUnit = useSelector(state => state.measurement_unit);
-    
-    // console.log(stateRandomRecipe)
-    // console.log(stateRecipeId)
+    let stateRecipe = useSelector(state => state.recipe);
+    console.log(stateRecipe)
+    console.log(stateRecipeId)
     const stateNutritionWidget = useSelector(state => state.nutrition_widget);
     let nutritionWidget
     let stateWidget
@@ -49,14 +49,17 @@ const Recipe = () => {
     if (stateRandomRecipe.id === parseInt(stateRecipeId)) {
         recipe = stateRandomRecipe
     }
-
-    for (let i = 0; i < Object.keys(stateMealPlanRecipes).length; i++) {
-        for (let j = 0; j < Object.values(stateMealPlanRecipes)[i].length; j++) {
-            if (Object.values(stateMealPlanRecipes)[i][j].id === parseInt(stateRecipeId)) {
-                recipe = Object.values(stateMealPlanRecipes)[i][j]
-            }
-        }
+    if (stateRecipe.id === parseInt(stateRecipeId)) {
+        recipe = stateRecipe
     }
+
+    // for (let i = 0; i < Object.keys(stateMealPlanRecipes).length; i++) {
+    //     for (let j = 0; j < Object.values(stateMealPlanRecipes)[i].length; j++) {
+    //         if (Object.values(stateMealPlanRecipes)[i][j].id === parseInt(stateRecipeId)) {
+    //             recipe = Object.values(stateMealPlanRecipes)[i][j]
+    //         }
+    //     }
+    // }
 
     // console.log(recipe.fave)
     const setUnit = (e) => {
@@ -87,7 +90,7 @@ const Recipe = () => {
                         <li>{recipe.servings} <br /> servings</li>
                     </ul>
                     <div className="conversion" id={stateMeasurementUnit} onClick={setUnit}>
-                        Toggle</div>
+                    {stateMeasurementUnit}</div>
                 </div>
                 <div className="recipeIngredients">
                     <h2>Ingredient list</h2>

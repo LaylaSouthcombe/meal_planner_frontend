@@ -9,7 +9,7 @@ import { createStore } from "redux";
 import store from "./store";
 // const store = createStore(reducer)
 
-const apiKey = "a59cc791056a438ab4b73975ca70e20f";
+const apiKey = "6b1f02c091b4429baee72031207aa9a8";
 
 export default apiKey;
 

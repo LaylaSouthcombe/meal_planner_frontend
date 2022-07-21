@@ -190,7 +190,7 @@ const UserPreferenceComponent = () => {
             {/* <p className="expandable" id="p">Hi</p> */}
             <div data-testid="label2" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="breakfast-budget" name="breakfast" />
               </label>
               {/* <label>
@@ -201,7 +201,7 @@ const UserPreferenceComponent = () => {
             <input data-testid="handleServiceChange1" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Lunch" name="lunch" className="hhh_3"/> Lunch
             <div data-testid="label1" className="toggle-section">
               <label >
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="lunch-budget" name="lunch" />
               </label>
               {/* <label>
@@ -212,7 +212,7 @@ const UserPreferenceComponent = () => {
             <input data-testid="handleServiceChange3" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dinner" name="dinner" /> Dinner
             <div data-testid="label3" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dinner-budget" name="dinner" />
               </label>
               {/* <label>
@@ -223,7 +223,7 @@ const UserPreferenceComponent = () => {
             <input data-testid="handleServiceChange4" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Snacks" name="snacks" /> Snacks
             <div data-testid="label4" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="snacks-budget" name="snacks" />
               </label>
               {/* <label>
@@ -234,7 +234,7 @@ const UserPreferenceComponent = () => {
             <input data-testid="handleServiceChange5" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dessert" name="dessert" /> Dessert
             <div data-testid="label5" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dessert-budget" name="dessert" />
               </label>
               {/* <label>
