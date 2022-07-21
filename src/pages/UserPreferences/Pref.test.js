@@ -1,4 +1,4 @@
-import { default as Register } from ".";
+import { default as UserPreferences } from ".";
 import { screen, render, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as router from "react-router";
@@ -6,37 +6,28 @@ import { Provider } from "react-redux";
 import store from "../../store";
 import "@testing-library/jest-dom";
 
-describe("Register", () => {
+describe("UserPreferences", () => {
   const navigate = jest.fn();
   beforeEach(() => {
     jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
   });
-
-  const register = (
+  const userP = (
     <Provider store={store}>
       <Router>
-        <Register />
+        <UserPreferences />
       </Router>
     </Provider>
   );
   test("it renders", () => {
-    render(register);
-    const heading = screen.getByRole("heading", { level: 2 });
-    expect(heading.textContent).toMatch(/Create Account/i);
-  });
-
-  test("it renders", () => {
-    render(register);
-    const heading = screen.getByRole("button", {
-      name: /sign up/i,
-    });
-    expect(heading).toBeInTheDocument();
+    render(userP);
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading.textContent).toMatch(/Set Preferences/i);
   });
 
   test("it navigates you one page back", () => {
-    render(register);
+    render(userP);
     const back = screen.queryByTestId(/back/i);
     fireEvent.click(back);
-    expect(navigate).toHaveBeenCalledWith("/");
+    expect(navigate).toHaveBeenCalledWith(-1);
   });
 });

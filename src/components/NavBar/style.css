@@ -1,18 +1,18 @@
 header {
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     width: 100%;
     display: flex;
-    background-color: #041129;
+    background-color: #1F6650;
     font-size: 16px;
     z-index: 1;
     justify-content: right;
 }
 
-.active {
+.active{
     font-weight: bold;
+    border-bottom: 5px solid #EA5E5E !important;
 }
-
 
 .topnav {
     display: none;
@@ -24,24 +24,27 @@ header {
 }
 
 .navBar > li > a {
-    cursor: pointer
+    cursor: pointer;
 }
-
+a:link {
+    text-decoration: none;
+}
 .sidenav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
 }
 
 .sideNavBar > li >a {
-    cursor: pointer
+    cursor: pointer;
+    color: #19323B;
 }
 
 .sideModal {
     position: absolute;
     height: 100vh;
-    background-color: #081e48;
-    width: 70%;
+    background-color: #6F9A8D;
+    width: 75%;
     z-index: 9998;
 }
 
@@ -55,6 +58,11 @@ header {
     padding-top: 5%;
     padding-left: 10%;
     font-size: 1.5em;
+    margin: 20px 30px;
+    border-radius: 15px;
+    background-color: #EAEEEC;
+    text-align: center;
+    border: 5px solid #1F6650;
 }
 
 
@@ -62,19 +70,9 @@ header {
     z-index: 9999;
     margin: 25px;
     padding: 10px 15px;
-    background-color: #081e48;
+    background-color: #F97F7F;
     border: none;
     outline: none;
-}
-
-.navIconBorder {
-    border: 3px solid #0AC3FF;
-    background-color: #041129;
-}
-
-.navIcon > li {
-    font-size: 30px;
-    color: #FF0A78;
 }
 
 
@@ -108,19 +106,16 @@ header {
     }
 
     .sideNavBar {
-        padding-top: 20vh;
+        padding-top: 12vh;
     }
-
+    .navIcon > i{
+        font-size: 25px;
+        width: 20px;
+        color: #19323B;
+    }
     .sideNavBar > li {
-        padding: 25px;
-        padding-top: 5%;
-        padding-left: 20%;
-        font-size: 1.5em;
-    }
-
-
-    .sideNavBar {
-        padding-top: 22vh;
+        padding: 15px;
+        font-size: 1.25em;
     }
 
     .sideNavBar > li:last-child {

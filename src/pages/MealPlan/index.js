@@ -14,6 +14,8 @@ const MealPlan = () => {
     console.log(state)
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const stateSetPreferences = useSelector((state) => state.preferences_set);
+    console.log(stateSetPreferences)
 
     const [generateText, setGenerateText] = useState("Generate meal plan")
 
@@ -35,32 +37,31 @@ const MealPlan = () => {
 
     let newMealPlan = { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: [] }
 
-    //TODO:get from state
+    
     let meals = useSelector(state => state.user_meals)
     console.log(meals)
-    // let meals = { breakfast: true, lunch: false, dinner: false, dessert: false, snacks: false }
 
-    //TODO:get from state
-    let intoleranes = ["eggs", "milk"]
+
+    
+    let intoleranes = useSelector(state => state.intolerances)
     let intolerancesParamsOld = ""
     for (let i = 0; i < intoleranes.length; i++) {
         intolerancesParamsOld += `,${intoleranes[i]}`
     }
     let intolerancesParams = intolerancesParamsOld.substring(1)
 
-    //TODO:get from state
-    let diet = { vegan: false, vegetarian: false, glutenFree: false, ketogenic: false, pescetarian: false, paleo: false }
-
+    let diet = useSelector(state => state.diet)
+    
     let dietParamsOld = ""
     for (let i = 0; i < Object.keys(diet).length; i++) {
         if (Object.values(diet)[i] === true) {
             dietParamsOld += `,${Object.keys(diet)[i]}`
-            console.log(dietParamsOld)
         }
     }
     let dietParams = dietParamsOld.substring(1)
 
     const getInitialMeal = async (meal) => {
+        try {
         const { data } = await axios.get(`https://api.spoonacular.com/recipes/random/?apiKey=${apiKey}&number=100&tags=${meal},${dietParams}&intolerances=${intolerancesParams}&excludeIngredients${intolerancesParams}&includeNutrition=true&instructionsRequired=true`)
         console.log("data", data.recipes)
         const retrievedRecipes = data.recipes
@@ -68,9 +69,14 @@ const MealPlan = () => {
         let formattedRetrievedRecipes = []
         let thisMealsRecipesInMealPlan = []
         for (let i = 0; i < retrievedRecipes.length; i++) {
-            if(retrievedRecipes[i].pricePerServing < stateBudgets[meal]*100){
+            if(stateBudgets[meal] !== 0){
+                if(retrievedRecipes[i].pricePerServing < stateBudgets[meal]*100){
+                    shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
+                    formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+                }
+            } else {
                 shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
-                formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+                    formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
             }
         }
         for (let i = 0; i < 7; i++) {
@@ -99,16 +105,27 @@ const MealPlan = () => {
             newMealPlan = { ...newMealPlan, snacks: thisMealsRecipesInMealPlan }
         }
         console.log("meal's recipes in meal plan after call", thisMealsRecipesInMealPlan)
+        } catch(err) {
+            console.log(err)
+        }
     }
     const getAdditionalMeal = async (meal) => {
+        console.log("hi")
         const { data } = await axios.get(`https://api.spoonacular.com/recipes/random/?apiKey=${apiKey}&number=25&tags=${meal},${dietParams}&intolerances=${intolerancesParams}&excludeIngredients${intolerancesParams}&includeNutrition=true&instructionsRequired=true`)
         console.log("data", data.recipes)
         const retrievedRecipes = data.recipes
         let shortRetrievedRecipes = []
         let formattedRetrievedRecipes = []
         for (let i = 0; i < retrievedRecipes.length; i++) {
-            shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
-            formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+            if(stateBudgets[meal] !== 0){
+                if(retrievedRecipes[i].pricePerServing < stateBudgets[meal]*100){
+                    shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
+                    formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+                }
+            } else {
+                shortRetrievedRecipes = { analyzedInstructions: retrievedRecipes[i].analyzedInstructions, cheap: retrievedRecipes[i].cheap, dairyFree: retrievedRecipes[i].dairyFree, extendedIngredients: retrievedRecipes[i].extendedIngredients, glutenFree: retrievedRecipes[i].glutenFree, id: retrievedRecipes[i].id, image: retrievedRecipes[i].image, pricePerServing: retrievedRecipes[i].pricePerServing, readyInMinutes: retrievedRecipes[i].readyInMinutes, servings: retrievedRecipes[i].servings, sourceUrl: retrievedRecipes[i].sourceUrl, summary: retrievedRecipes[i].summary, title: retrievedRecipes[i].title, vegan: retrievedRecipes[i].vegan, vegetarian: retrievedRecipes[i].vegetarian }
+                    formattedRetrievedRecipes.push({ ...shortRetrievedRecipes, lock: true, fave: false })
+            }
         }
         if (meal === "breakfast") {
             newRecipes = { ...newRecipes, breakfast: formattedRetrievedRecipes }
@@ -133,8 +150,6 @@ const MealPlan = () => {
 
     const getMeals = async (e) => {
         e.preventDefault()
-
-        // checks to see if a recipe is locked, if not it is added to unlocked array
         let numberOfUnlocked = 0
         for (let i = 0; i < Object.keys(meals).length; i++) {
             for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
@@ -144,9 +159,6 @@ const MealPlan = () => {
                 }
             }
         }
-        console.log(numberOfUnlocked)
-        console.log("unlocked meals", unlockedMeals)
-
         for (let i = 0; i < Object.keys(meals).length; i++) {
             if (numberOfUnlocked === 0 && Object.values(meals)[i] === true) {
                 if (Object.keys(meals)[i] === "breakfast") {
@@ -190,7 +202,6 @@ const MealPlan = () => {
                     if (Object.values(stateMealRecipes)[i][j].lock === false) {
                         Object.values(stateMealRecipes)[i][j] = Object.values(stateRecipes)[i][0]
                         Object.values(stateRecipes)[i].splice(0, 1)
-                        console.log("state recipes after unlocked replaced", stateRecipes)
                         if (Object.keys(meals)[i] === "breakfast") {
                             newMealPlan = { ...newMealPlan, breakfast: Object.values(stateMealRecipes)[i] }
                             newRecipes = { ...newRecipes, breakfast: Object.values(stateRecipes)[i] }
@@ -258,43 +269,25 @@ const MealPlan = () => {
 
         }
 
-        console.log("new recipes after getMeals", newRecipes)
-        console.log("new meal plan after getMeals", newMealPlan)
-
         dispatch({ type: "SET RECIPES", payload: newRecipes })
         dispatch({ type: "SET VIEWED RECIPES", payload: viewedRecipes })
         dispatch({ type: "SET MEAL PLAN RECIPES", payload: newMealPlan })
     }
 
 
-
-
-
-
-    //TODO:generate shopping list
     let shoppingList
     const sendShoppingItems = async (shoppingItems) => {
         const options = {
             "items": shoppingItems
         }
-        const { data } = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
+        const {data} = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
         console.log(data)
         shoppingList = data
     }
+
     const generateShoppingList = async (e) => {
         e.preventDefault()
-        // take in all items from recipes
-        // send to api with structure of 
-        // {
-        //     "items": [
-        //         "4 lbs tomatoes",
-        //         "10 tomatoes",
-        //         "20 Tablespoons Olive Oil",
-        //         "6 tbsp Olive Oil"
-        //     ]
-        // }
         let items = []
-        //extracts all ingredients from all the recipes in the meal plan
         for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
             if (Object.values(stateMealRecipes)[i].length) {
                 for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
@@ -304,8 +297,6 @@ const MealPlan = () => {
                         let ingredientMeasureUnit = Object.values(stateMealRecipes)[i][j].extendedIngredients[k].measures.us.unitShort
                         let itemString = `${ingredientMeasureAmount} ${ingredientMeasureUnit} ${ingredientName}`
                         items.push(itemString)
-                        console.log(itemString)
-                        console.log(items)
                     }
                 }
             }
@@ -318,69 +309,81 @@ const MealPlan = () => {
     }
 
 
-
-    //TODO:submit meal plan
-    // take in all id's, titles, and faves
-    // add to array
-    // send to db
-
     const submitMealPlan = async (e) => {
         e.preventDefault()
-
         let recipesToSendToDb = { today_date: "", recipes: { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: []}}
-        for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
-            for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
-                let currentRecipe = Object.values(stateMealRecipes)[i][j]
-                currentRecipe.lock = true
-                let mealEntry = {id: `${currentRecipe.id}`, title: currentRecipe.title, image: currentRecipe.image, fave: currentRecipe.fave}
-                if(Object.keys(stateMealRecipes)[i] === "breakfast"){
-                    recipesToSendToDb.recipes.breakfast.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "lunch"){
-                    recipesToSendToDb.recipes.lunch.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "dinner"){
-                    recipesToSendToDb.recipes.dinner.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "dessert"){
-                    recipesToSendToDb.recipes.dessert.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "snacks"){
-                    recipesToSendToDb.recipes.snacks.push(mealEntry)
+        try {
+
+            for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
+                for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                    let currentRecipe = Object.values(stateMealRecipes)[i][j]
+                    currentRecipe.lock = true
+                    let mealEntry = {id: `${currentRecipe.id}`, title: currentRecipe.title, image: currentRecipe.image, fave: currentRecipe.fave}
+                    if(Object.keys(stateMealRecipes)[i] === "breakfast"){
+                        recipesToSendToDb.recipes.breakfast.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "lunch"){
+                        recipesToSendToDb.recipes.lunch.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "dinner"){
+                        recipesToSendToDb.recipes.dinner.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "dessert"){
+                        recipesToSendToDb.recipes.dessert.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "snacks"){
+                        recipesToSendToDb.recipes.snacks.push(mealEntry)
+                    }
                 }
             }
+            dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
+            let today = new Date();
+            
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            today = dd + '/' + mm + '/' +  yyyy;
+            recipesToSendToDb.today_date = today
             console.log(recipesToSendToDb)
+            const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/mealhistory/`, JSON.stringify(recipesToSendToDb))
+            stateUsersRecipesHistory.unshift(recipesToSendToDb)
+            setGenerateText("Generate new meal plan")
+        }catch(err){
+            console.log(err)
         }
-        dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
-        let today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        today = dd + '/' + mm + '/' +  yyyy;
-        console.log(today)
-        recipesToSendToDb.today_date = today
-        console.log(recipesToSendToDb)
-        const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/mealhistory/`, JSON.stringify(recipesToSendToDb))
-        console.log(data)
-        stateUsersRecipesHistory.unshift(recipesToSendToDb)
-        //confirmation message saying can now view shopping list
-        
-        setGenerateText("Generate new meal plan")
     }
 
 
-
+//TODO: add last meal in meal history to meal plan on sign in
     return (
         <>
             <h1>Meal Plan</h1>
-            <div className="generateMeal">
-                <button onClick={getMeals}>{generateText}</button>
+            {stateSetPreferences === true && (
+                <div className="mealPlanButtons">
+                    <div className="generateMeal">
+                        <button data-testid="getMealsBtn" onClick={getMeals}>{generateText}</button>
+                    </div>
+                    {(stateMealRecipes.breakfast.length !== 0 || stateMealRecipes.lunch.length !== 0 || stateMealRecipes.dinner.length !== 0 || stateMealRecipes.dessert.length !== 0 || stateMealRecipes.snacks.length !== 0 ) && (
+                    <div className="shoppingListBtn">
+                        <button data-testid="shoppingListBtn" onClick={generateShoppingList}>Shopping list</button>
+                    </div>
+            )}
+                </div>
+            )}
+            
+            <div className="ConditionlMealMessages">
+            {(stateSetPreferences === false ) && (
+                    <div className="noPreferences">
+                        <p>You haven't set your preferences yet, set them <span data-testid="prefNav" onClick={() => navigate('/preferences')}>here</span></p>
+                    </div>
+                )}
+            {(stateSetPreferences === true && stateMealRecipes.breakfast.length === 0 && stateMealRecipes.lunch.length === 0 && stateMealRecipes.dinner.length === 0 && stateMealRecipes.dessert.length === 0 && stateMealRecipes.snacks.length === 0 ) && (
+                <div className="noMealPlan">
+                    <p>You don't have a meal plan yet, create one first!</p>
+                </div>
+            )}
             </div>
-            <div className="shoppingListBtn">
-                <button onClick={generateShoppingList}>Shopping list</button>
-            </div>
-            <div className="recipesMealPlan">
-
+            <div className="recipesMealPlan" data-testid="mealDivs">
                 {stateMealRecipes.breakfast.length > 0 && (
                     <CollapsibleRecipes meal={"breakfast"} fullRecipes={stateMealRecipes} triggerName="Breakfast" page="mealplan"/>
                 )}
@@ -397,7 +400,9 @@ const MealPlan = () => {
                     <CollapsibleRecipes meal={"snacks"} fullRecipes={stateMealRecipes} triggerName="Snacks" page="mealplan"/>
                 )}
             </div>
-            <div className="submitMealPlan" onClick={submitMealPlan}>Submit meal plan</div>
+            {(stateMealRecipes.breakfast.length !== 0 || stateMealRecipes.lunch.length !== 0 || stateMealRecipes.dinner.length !== 0 || stateMealRecipes.dessert.length !== 0 || stateMealRecipes.snacks.length !== 0 ) && (
+                <div className="submitMealPlan" data-testid="submitMeal" onClick={submitMealPlan}>Submit meal plan</div>
+            )}
         </>
     )
 };

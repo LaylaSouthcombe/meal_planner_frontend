@@ -1,4 +1,4 @@
-import { default as Login } from ".";
+import { default as Homepage } from ".";
 import { screen, render, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as router from "react-router";
@@ -11,25 +11,17 @@ describe("Category", () => {
   beforeEach(() => {
     jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
   });
-
-  const login = (
+  const page = (
     <Provider store={store}>
       <Router>
-        <Login />
+        <Homepage />
       </Router>
     </Provider>
   );
 
-  test("it renders", () => {
-    render(login);
-    const heading = screen.getByRole("heading", { level: 2 });
-    expect(heading.textContent).toMatch(/Login/i);
-  });
-
-  test("it navigates you one page back", () => {
-    render(login);
-    const back = screen.queryByTestId(/back/i);
-    fireEvent.click(back);
-    expect(navigate).toHaveBeenCalledWith("/");
+  test("it renders the h1 'category' ", () => {
+    render(page);
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading.textContent).toMatch(/Sooki/i);
   });
 });

@@ -1,0 +1,98 @@
+.hompageImg{
+    width: 100%;
+    position: relative;
+}
+.hompageImg > img{
+    width: 100%;
+}
+.homeImgOverlay {
+    background-color: black;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.featuresSection{
+    display: flex;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    justify-content: space-between;
+}
+.featuresText {
+    margin-left: 30px;
+    width: 60%;
+}
+.featuresText > p {
+    color: #F97F7F;
+    font-weight: bold;
+    font-size: 22px;
+}
+.features {
+    color: #19323B;
+    font-size: 18px;
+    margin-left: 20px;
+}
+.loginSignup {
+    background-color: #EAEEEC;
+    height: 60px;
+    border-radius: 15px;
+    width: 100px;
+    margin-right: 30px;
+    margin-top: 20px;
+    text-align: center;
+    color: #19323B;
+}
+.loginSignup > p > a{
+    color: #19323B;
+}
+.loginSignup > p:first-child {
+    margin-top: 10px;
+}
+.recipeOfDay{
+    background-color: #EAFBEA;
+}
+.hompageInstructionsDiv > p {
+    margin-top: 30px;
+    color: #19323B;
+    text-align: center;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.hompageInstructions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.hompageInstructionsImg {
+    width: 30%;
+    overflow: hidden;
+    border-radius: 150px;
+    border: 4px solid #EA5E5E;
+}
+.hompageInstructions > li > img {
+    width: 100%;
+    transform: scale(1.25)
+}
+
+.hompageInstructionsStep {
+    width: 30%;
+    text-align: center;
+    list-style: none;
+    margin-top: 20px;
+}
+
+.randomFact {
+    background-color: #EAFBEA;
+    margin-top: 20px;
+}
+.randomFact > p {
+    color: #EA5E5E;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 26px;
+    font-weight: bold;
+}

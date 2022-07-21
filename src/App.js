@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { NavBar } from "./components";
+import { NavBar, Footer } from "./components";
 import {
   History,
   Homepage,
@@ -9,7 +9,8 @@ import {
   Recipe,
   Register,
   ShoppingList,
-  UserPreferences
+  UserPreferences,
+  PageNotFound
 } from "./pages";
 
 import "./App.css";
@@ -30,7 +31,11 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="shoppinglist" element={<ShoppingList />} />
         <Route path="preferences" element={<UserPreferences />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <footer >
+        <Footer />
+      </footer>
     </>
   );
 }

@@ -1,28 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import './style.css'
 import Collapsible from 'react-collapsible';
 
-const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, date }) => {
+import apiKey from '../../'
+
+const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
+console.log(page)
+const stateMealPlanRecipes = useSelector(state => state.meal_plan_recipes);
+    const stateRandomRecipe = useSelector(state => state.random_recipe);
+    const stateUserRecipeHistory = useSelector(state => state.users_recipe_history);
+    console.log(stateUserRecipeHistory)
+let recipe
+console.log(fullRecipes)
+const findRecipe = async (recipeId) => {
+  console.log(recipeId)
+  if (stateRandomRecipe.id === parseInt(recipeId)) {
+    recipe = stateRandomRecipe
+    console.log("random")
+  }
+  for (let i = 0; i < Object.keys(stateMealPlanRecipes).length; i++) {
+      for (let j = 0; j < Object.values(stateMealPlanRecipes)[i].length; j++) {
+          if (Object.values(stateMealPlanRecipes)[i][j].id === parseInt(recipeId)) {
+              recipe = Object.values(stateMealPlanRecipes)[i][j]
+              console.log("meal plan")
+          }
+          
+      }
+  }
+  for(let i = 0; i< stateUserRecipeHistory.length; i++){
+    for (let j = 0; j < Object.keys(stateUserRecipeHistory[i].recipes).length; j++) {
+      for (let k = 0; k < Object.values(stateUserRecipeHistory[i].recipes)[j].length; k++) {
+        if (Object.values(stateUserRecipeHistory[i].recipes)[j][k].id === recipeId) {
+          console.log("fetch")
+          const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=false`
+          const { data } = await axios.get(url)
+          console.log(data)
+          recipe = data
+      }
+    }
+  }
+}
 
-  // console.log("this is favourited " + favourited)
+  
+  dispatch({ type: "SET RECIPE", payload: recipe })
+}
 
-  const viewFullRecipe = (e) => {
+  const viewFullRecipe = async (e) => {
     const parentClassName = e.target.parentElement.className
     const splitString = parentClassName.split(' ')
     const recipeIdStr = splitString[1]
     const newRecipeId = parseInt(recipeIdStr)
+    console.log(newRecipeId)
     dispatch({ type: "SET RECIPE ID", payload: newRecipeId })
+    await findRecipe(recipeIdStr)
     navigate("/recipe")
   }
-  // console.log("meal recipes", mealRecipes)
-  // console.log("recipes in collapsible", fullRecipes)
-
-  // console.log(fullRecipes[meal])
 
   const faveFilter = () => {
     const faveRecipe = document.querySelectorAll('#target')
@@ -41,15 +78,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
     )
   }
 
-
-
-
-  // TODO:add conditional that if user meals is same as initial state, do a calculateNewValue, if not set meal recipes to state recipes
-  // const [mealRecipes, setMealRecipes] = useState(recipes)
-  // causing an error, shouldn't when added to useEffect
-  // dispatch({ type: "SET MEAL PLAN RECIPES", payload: recipes})
-
-  // console.log(fullRecipes[meal])
   const changeLockRecipe = (e) => {
     const parentClassName = e.target.parentElement.className
     const lockClassName = e.target.className
@@ -72,7 +100,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
     dispatch({ type: "SET MEAL PLAN RECIPES", payload: fullRecipes })
   }
 
-  // copy to recipe page
   const changefaveRecipe = (e) => {
     const parentClassName = e.target.parentElement.className
     const faveClassName = e.target.className
@@ -84,12 +111,10 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
         if (fullRecipes[meal][i].id === faveRecipeIdInt) {
           if (faveClassName === "faved") {
             fullRecipes[meal][i].fave = false
-            console.log(fullRecipes[meal][i].fave)
             e.target.className = "unfaved"
           }
           if (faveClassName === "unfaved") {
             fullRecipes[meal][i].fave = true
-            console.log(fullRecipes[meal][i].fave)
             e.target.className = "faved"
           }
         }
@@ -100,13 +125,10 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
         if (fullRecipes[meal][i].id === faveRecipeIdStr) {
           if (faveClassName === "faved") {
             fullRecipes[meal][i].fave = false
-            console.log(date)
             e.target.className = "unfaved"
           }
           if (faveClassName === "unfaved") {
             fullRecipes[meal][i].fave = true
-            console.log(fullRecipes[meal][i].fave)
-            console.log(date)
             e.target.className = "faved"
           }
         }
@@ -121,7 +143,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
       <Collapsible trigger={triggerName}>
         {fullRecipes[meal].map(recipe => {
           return (
-
             <div id="target" key={recipe.id} className={"recipe " + recipe.id}>
               {faveFilter()}
               <div className={"recipeInfoCard " + recipe.id} data-testid="recipe" onClick={viewFullRecipe}>

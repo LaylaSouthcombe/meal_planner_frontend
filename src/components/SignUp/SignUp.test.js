@@ -5,6 +5,7 @@ import * as router from "react-router";
 import { Provider } from "react-redux";
 import store from "../../store";
 import "@testing-library/jest-dom";
+import axios from "axios";
 
 describe("SignUp", () => {
   const navigate = jest.fn();
@@ -131,11 +132,16 @@ describe("SignUp", () => {
       name: /Sign up/i,
     });
     fireEvent.click(button);
-    expect.objectContaining({
-      name: "testing",
-      email: "testing@test.com",
-      password: "tesaaa",
-    });
+
+    expect(axios.post).toHaveBeenCalled();
+    // With(
+    //   "https://mealplannerserver.herokuapp.com/createuser/",
+    //   expect.objectContaining({
+    //     name: "testing",
+    //     email: "testing@test.com",
+    //     password: "tesaaa",
+    //   })
+    // );
   });
 
   test("naviagate", () => {

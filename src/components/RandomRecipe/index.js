@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import './style.css'
 
 import apiKey from '../../'
 
@@ -13,8 +14,16 @@ import apiKey from '../../'
     let randomRecipe = {}
     
     const viewRecipe = (e) => {
-      const parentId = e.target.parentElement.id
-      dispatch({ type: "SET RECIPE ID", payload: parentId })
+      let targetClassName = e.target.className
+      if(!targetClassName){
+        targetClassName = e.target.parentElement.className
+      }
+      console.log(targetClassName)
+      const splitString = targetClassName.split(' ')
+      const recipeIdStr = splitString[1]
+      console.log(recipeIdStr)
+      const newRecipeId = parseInt(recipeIdStr)
+      dispatch({ type: "SET RECIPE ID", payload: newRecipeId })
       navigate("/recipe")
     }
   
@@ -50,7 +59,7 @@ console.log(dietParams)
           const retrievedRecipes = data.recipes
           console.log(data.recipes)
           let shortRetrievedRecipe = []
-          shortRetrievedRecipe = {cheap: retrievedRecipes[0].cheap, dairyFree: retrievedRecipes[0].dairyFree, extendedIngredients: retrievedRecipes[0].extendedIngredients, glutenFree: retrievedRecipes[0].glutenFree, id: retrievedRecipes[0].id, image: retrievedRecipes[0].image, instructions: retrievedRecipes[0].instructions, pricePerServing: retrievedRecipes[0].pricePerServing, readyInMinutes: retrievedRecipes[0].readyInMinutes, servings: retrievedRecipes[0].servings, sourceUrl: retrievedRecipes[0].sourceUrl, summary: retrievedRecipes[0].summary, title: retrievedRecipes[0].title, vegan: retrievedRecipes[0].vegan, vegetarian: retrievedRecipes[0].vegetarian}
+          shortRetrievedRecipe = {analyzedInstructions: retrievedRecipes[0].analyzedInstructions, cheap: retrievedRecipes[0].cheap, dairyFree: retrievedRecipes[0].dairyFree, extendedIngredients: retrievedRecipes[0].extendedIngredients, glutenFree: retrievedRecipes[0].glutenFree, id: retrievedRecipes[0].id, image: retrievedRecipes[0].image, pricePerServing: retrievedRecipes[0].pricePerServing, readyInMinutes: retrievedRecipes[0].readyInMinutes, servings: retrievedRecipes[0].servings, sourceUrl: retrievedRecipes[0].sourceUrl, summary: retrievedRecipes[0].summary, title: retrievedRecipes[0].title, vegan: retrievedRecipes[0].vegan, vegetarian: retrievedRecipes[0].vegetarian}
           console.log(shortRetrievedRecipe)
           console.log(data.recipes[0])
           randomRecipe = shortRetrievedRecipe
@@ -61,26 +70,32 @@ console.log(dietParams)
         }
       }
 
+      
       if(stateRandomRecipe.title === 'no recipe'){
         fetchRandomRecipe()
         console.log(randomRecipe)
       } else {
         randomRecipe = stateRandomRecipe
       }
+      
 
 console.log(randomRecipe)
     return (
       <>
-      {stateRandomRecipe.title !== 'no recipe' && 
-      (<div className="randomRecipe" onClick={viewRecipe} id={stateRandomRecipe.id}>
-        {/* <header className="App-header"> */}
-          <h1> {stateRandomRecipe.title} </h1>
-          <p> This cool recipe will only take {stateRandomRecipe.readyInMinutes} minutes to be ready! </p>
-          <img src={stateRandomRecipe.image} alt="" />
-        {/* </header> */}
-      </div>)}
+        {stateRandomRecipe.title !== 'no recipe' && 
+          (<div className={"randomRecipeContainer " + stateRandomRecipe.id} onClick={viewRecipe} id={stateRandomRecipe.id}>
+            <h3>Recipe of the day</h3>
+            <div className={"randomRecipe " + stateRandomRecipe.id}>
+              <div className={"randomRecipeImg " + stateRandomRecipe.id}>
+                <img src={stateRandomRecipe.image} alt="random recipe image"/>
+              </div>
+              <div className={"randomRecipeInfo " + stateRandomRecipe.id}>
+                <p>{stateRandomRecipe.title}</p>
+                <p>This recipe only takes {stateRandomRecipe.readyInMinutes} minutes to be ready!</p>
+            </div>
+            </div>
+        </div>)}
       </>
-      
     );
   }
   

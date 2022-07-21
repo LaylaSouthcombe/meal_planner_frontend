@@ -6,3 +6,4 @@ export { default as Recipe } from './Recipe';
 export { default as Register } from './Register';
 export { default as ShoppingList } from './ShoppingList';
 export { default as UserPreferences } from './UserPreferences';
+export { default as PageNotFound } from './PageNotFound';

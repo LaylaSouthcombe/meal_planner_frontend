@@ -1,0 +1,8 @@
+.fact > p {
+    text-align: center;
+    width: 75%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    color: #19323B;
+    font-size: 18px;
+}

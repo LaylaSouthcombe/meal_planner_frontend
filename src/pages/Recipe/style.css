@@ -1,0 +1,159 @@
+.backButton {
+    display: flex;
+}
+
+.backButton > p{
+    font-size: 20px;
+    width: 50px;
+    line-height: 50px;
+    margin-left: 10px;
+}
+
+.backButton > img {
+    width: 40px;
+    margin-left: 10px;
+}
+
+.recipeTitleDiv {
+    color: #EA5E5E;
+    margin-left: 20px;
+    display: flex;
+}
+.recipeTitleDiv > h1 {
+    width: 80%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.unfavedRecipePage {
+    background-image: url('../../images/emptyHeart.png');
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+    margin-top: 30px;
+}
+
+.favedRecipePage{
+    background-image: url('../../images/filledHeart.png');
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+    margin-top: 30px;
+}
+.servingsInfo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #EAFBEA;
+    padding-bottom: 20px;
+}
+.recipePriceTimeServ {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    list-style: none;
+    margin-top: 20px;
+    
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.recipePriceTimeServ > li {
+    text-align: center;
+    background-color: #f9fffd;
+    padding: 8px;
+    border-radius: 10px;
+    border: 3px solid #EA5E5E;
+}
+
+.recipeIngredients {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.ingredientsAndNutrition{
+    display: flex;
+}
+#spoonacular-nutrition-label{
+    width: 180px;
+}
+
+.ingredientsList {
+    
+
+}
+
+.nutrition{
+    width: 50%;
+}
+
+
+#spoonacular-nutrition-label,
+#spoonacular-nutrition-ingredient-list {
+    border:1px solid black;
+    margin:0 auto;
+    width:200px;
+    padding:.5rem;
+    font-family:Helvetica,Arial,sans-serif,sans-serif;
+    font-size:12px;
+    color:#333;
+    background-color:#fff
+}
+#spoonacular-nutrition-ingredient-list{
+    text-transform:uppercase
+}
+#spoonacular-nutrition-label div.separator{
+    border-bottom:10px solid black
+}
+#spoonacular-nutrition-label>div:first-of-type{
+    border-bottom:10px solid black;
+    padding:0 0 .25rem 0;
+    margin:0 0 .5rem 0
+}
+#spoonacular-nutrition-label>div:first-of-type p{
+    margin:0;font-size:12px
+}
+#spoonacular-nutrition-label table{
+    border-collapse:unset;
+    border-spacing:0;
+    font-size:12px;
+    width:100%
+}
+#spoonacular-nutrition-label table td{
+    font-weight:normal;
+    text-align:left;
+    padding:.3rem 0;
+    border-top:1px solid black;
+    vertical-align:middle
+}
+#spoonacular-nutrition-label table .empty{
+    width:1rem;border-top:0
+}
+#spoonacular-nutrition-label table #calorie-summary td{
+    font-size:20px;
+    border:0 none!important
+}
+#spoonacular-nutrition-label b{
+    font-weight:900
+}
+#spoonacular-nutrition-label .separator td{
+    border-top-width:5px
+}
+#spoonacular-nutrition-label table:first-of-type td:last-child{
+    text-align:right!important
+}
+#spoonacular-nutrition-label table:nth-of-type(2) td:first-child{
+    text-align:left!important
+}
+#spoonacular-nutrition-label table:nth-of-type(2) td:nth-of-type(2){
+    text-align:right!important
+}
+#spoonacular-nutrition-label .small{
+    font-size:11px
+}
+#spoonacular-nutrition-label h1.separator{
+    border-bottom:1px solid black
+}
+#spoonacular-nutrition-label h1{
+    font-size:20px;
+    margin:0 0 .25rem 0
+}
+

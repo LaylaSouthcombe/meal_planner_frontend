@@ -2,10 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../../images/backArrow.png";
 
-import { SignUp } from "../../components";
-
-const Register = () => {
+const PageNotFound = () => {
   const navigate = useNavigate();
+
   return (
     <>
       <div
@@ -16,9 +15,11 @@ const Register = () => {
         <img src={backArrow} alt="back button" />
         <p>Home</p>
       </div>
-      <SignUp />
+      <div className="notFound">
+        <h1>Opps! Page not found, let's return to home and try again</h1>
+      </div>
     </>
   );
 };
 
-export default Register;
+export default PageNotFound;

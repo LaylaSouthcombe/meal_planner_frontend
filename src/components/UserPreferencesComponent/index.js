@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import './style.css'
+import { useNavigate } from "react-router-dom";
 
-function UserPreferenceComponent() {
-
+const UserPreferenceComponent = () => {
+  const navigate = useNavigate();
+  const [prefsMessageVisibility, setPrefsMessageVisibility] = useState("hidden")
   const [intoleranceList, setIntoleranceList] = useState([{ intolerance: "" }]);
   const [meals, setMeals] = useState({ breakfast: false, lunch: false, dinner: false, snack: false, dessert: false })
 
@@ -33,7 +35,7 @@ function UserPreferenceComponent() {
     setIntoleranceList([...intoleranceList, { intolerance: "" }]);
   };
 
-  
+
 
 
   const handleCheckboxChange = (checkbox) => {
@@ -46,10 +48,10 @@ function UserPreferenceComponent() {
     }
   }
 
-  const handleCalorieChange = (e) => {
-    const mealType = e.target.name
-    setCalories({ ...calories, [mealType]: parseInt(e.target.value) });
-  }
+  // const handleCalorieChange = (e) => {
+  //   const mealType = e.target.name
+  //   setCalories({ ...calories, [mealType]: parseInt(e.target.value) });
+  // }
   const handleBudgetChange = (e) => {
     const mealType = e.target.name
     setBudget({ ...budget, [mealType]: parseInt(e.target.value) });
@@ -57,10 +59,10 @@ function UserPreferenceComponent() {
   let newDiet = { vegan: false, vegetarian: false, glutenfree: false, ketogenic: false, pescetarian: false, paleo: false }
   const handleRadioBtns = () => {
     const radioBtns = document.querySelectorAll('input[type = "radio"]')
-    
+
     radioBtns.forEach((e) => {
-      if(e.checked && e.value === "all"){
-        newDiet = { vegan: true, vegetarian: true, glutenfree: true, ketogenic: true, pescetarian: true, paleo: true }
+      if (e.checked && e.value === "all") {
+        newDiet = { vegan: false, vegetarian: false, glutenfree: false, ketogenic: false, pescetarian: false, paleo: false }
         setDiet(newDiet)
       } else {
         if (e.checked) {
@@ -72,46 +74,52 @@ function UserPreferenceComponent() {
     }
     )
   }
-let intolerances
-  
-let prefsToBeSentToDb 
+  let intolerances
+
+  let prefsToBeSentToDb
 
   const sendPrefs = async () => {
-    if(stateLoginOrRegister === "login"){
+    if (stateLoginOrRegister === "login") {
       console.log("send patch", prefsToBeSentToDb)
       const { data } = await axios.patch(`https://mealplannerserver.herokuapp.com/prefs/`, JSON.stringify(prefsToBeSentToDb))
       console.log(data)
     }
-    if(stateLoginOrRegister === "register"){
+    if (stateLoginOrRegister === "register") {
       console.log("send post", prefsToBeSentToDb)
       const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/createprefs/`, JSON.stringify(prefsToBeSentToDb))
       console.log(data)
     }
-    
   }
   const onSubmit = async (e) => {
     e.preventDefault()
-    handleRadioBtns()
-    const arr = []
-    for (const e of intoleranceList) {
-      arr.push(e.service)
-      console.log(e.service)
+    try {
+      handleRadioBtns()
+      const arr = []
+      for (const e of intoleranceList) {
+        arr.push(e.service)
+        console.log(e.service)
+      }
+      setIntolerance(arr)
+      console.log(arr)
+      arr.pop()
+      console.log(arr)
+      console.log(meals)
+      console.log(calories)
+      console.log(budget)
+      console.log(newDiet)
+      dispatch({ type: "SET USER INTOLERANCES", payload: intolerance });
+      dispatch({ type: "SET USER DIET", payload: newDiet });
+      dispatch({ type: "SET USER MEALS", payload: meals });
+      dispatch({ type: "SET USER CALORIES", payload: calories });
+      dispatch({ type: "SET USER BUDGETS", payload: budget });
+      dispatch({ type: "SET PREFERENCES SET", payload: true })
+      prefsToBeSentToDb = { prefs: { calories_limit: calories, intolorences: arr, budget: budget }, diet: newDiet, meals: meals }
+      await sendPrefs()
+      setPrefsMessageVisibility("visible")
+    } catch (err) {
+      console.log(err)
     }
-    setIntolerance(arr)
-    console.log(arr)
-    arr.pop()
-    console.log(arr)
-    console.log(meals)
-    console.log(calories)
-    console.log(budget)
-    console.log(newDiet)
-    dispatch({ type: "SET USER INTOLERANCES", payload: intolerance });
-    dispatch({ type: "SET USER DIET", payload: newDiet });
-    dispatch({ type: "SET USER MEALS", payload: meals });
-    dispatch({ type: "SET USER CALORIES", payload: calories });
-    dispatch({ type: "SET USER BUDGETS", payload: budget });
-    prefsToBeSentToDb = {prefs: {calories_limit: calories, intolorences: arr, budget: budget}, diet: newDiet, meals: meals}
-    await sendPrefs()
+
   }
 
 
@@ -121,9 +129,8 @@ let prefsToBeSentToDb
     <>
       <h1>Set Preferences</h1>
       <div className="preferences-box">
-        <form onSubmit={(e) => { onSubmit(e) }}>
+        <form data-testid="onsubmit" onSubmit={(e) => { onSubmit(e) }}>
           <div className="diets-section">
-
             <h3>Diets</h3>
             <p>I only want to recieve recipes that are:</p>
             <input type="radio" value="glutenfree" name="Diet" /> Gluten-free
@@ -143,6 +150,7 @@ let prefsToBeSentToDb
                 <div key={index} className="services">
                   <div className="first-division">
                     <input
+
                       spellCheck="true"
                       name="service"
                       type="text"
@@ -154,8 +162,7 @@ let prefsToBeSentToDb
                       <button
                         type="button"
                         onClick={handleServiceAdd}
-                        className="add-btn"
-                      >
+                        className="add-btn">
                         <span>Add</span>
                       </button>
                     )}
@@ -165,8 +172,7 @@ let prefsToBeSentToDb
                       <button
                         type="button"
                         onClick={() => handleServiceRemove(index)}
-                        className="remove-btn"
-                      >
+                        className="remove-btn">
                         <span>Remove</span>
                       </button>
                     )}
@@ -178,67 +184,68 @@ let prefsToBeSentToDb
 
           <div className="meals-section">
             <h3>Meals</h3>
-
-            <input type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Breakfast" name="breakfast" id="expand-toggle" /> Breakfast
+            <input data-testid="handleServiceChange2" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Breakfast" name="breakfast" id="expand-toggle" /> Breakfast
             {/* <p className="expandable" id="p">Hi</p> */}
-            <div className="toggle-section">
+            <div data-testid="label2" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="breakfast-budget" name="breakfast" />
               </label>
-              <label>
+              {/* <label>
                 Calories:
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="breakfast-calories" name="breakfast" />
-              </label>
+              </label> */}
             </div>
-            <input type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Lunch" name="lunch" /> Lunch
-            <div className="toggle-section">
-              <label>
-                Budget:
+            <input data-testid="handleServiceChange1" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Lunch" name="lunch" /> Lunch
+            <div data-testid="label1" className="toggle-section">
+              <label >
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="lunch-budget" name="lunch" />
               </label>
-              <label>
+              {/* <label>
                 Calories:
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="lunch-calories" name="lunch" />
-              </label>
+              </label> */}
             </div>
-            <input type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dinner" name="dinner" /> Dinner
-            <div className="toggle-section">
+            <input data-testid="handleServiceChange3" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dinner" name="dinner" /> Dinner
+            <div data-testid="label3" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dinner-budget" name="dinner" />
               </label>
-              <label>
+              {/* <label>
                 Calories:
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="dinner-calories" name="dinner" />
-              </label>
+              </label> */}
             </div>
-            <input type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Snacks" name="snacks" /> Snacks
-            <div className="toggle-section">
+            <input data-testid="handleServiceChange4" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Snacks" name="snacks" /> Snacks
+            <div data-testid="label4" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="snacks-budget" name="snacks" />
               </label>
-              <label>
+              {/* <label>
                 Calories:
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="snacks-calories" name="snacks" />
-              </label>
+              </label> */}
             </div>
-            <input type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dessert" name="dessert" /> Dessert
-            <div className="toggle-section">
+            <input data-testid="handleServiceChange5" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Dessert" name="dessert" /> Dessert
+            <div data-testid="label5" className="toggle-section">
               <label>
-                Budget:
+                Budget(£):
                 <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dessert-budget" name="dessert" />
               </label>
-              <label>
+              {/* <label>
                 Calories:
                 <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="dessert-calories" name="dessert" />
-              </label>
+              </label> */}
             </div>
             <button type="submit">submit prefs</button>
           </div>
         </form>
-
+      </div>
+      <div className="preferencesConfirmed" style={{ visibility: prefsMessageVisibility }}>
+        <p data-testid="p">You're preferences have been updated! Create a new meal plan <span data-testid="span" onClick={(() => navigate('/mealplan'))}>here</span></p>
       </div>
     </>
   );

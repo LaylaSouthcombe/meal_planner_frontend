@@ -1,14 +1,15 @@
-const initialState = {
+export const initialState = {
     recipes: { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: [] },
     recipe_id: "12",
+    recipe: {},
     users_recipe_history: [
         {
-            date: "date", recipes: {
-                breakfast: [{ id: "", title: "", fave: "" }],
-                lunch: [{ id: "", title: "", fave: "" }],
-                dinner: [{ id: "", title: "", fave: "" }],
-                dessert: [{ id: "", title: "", fave: "" }],
-                snacks: [{ id: "", title: "fgdfgfd", fave: false }]
+            today_date: "date", recipes: {
+                breakfast: [],
+                lunch: [],
+                dinner: [],
+                dessert: [],
+                snacks: []
             }
         }
     ],
@@ -26,7 +27,11 @@ const initialState = {
     user_meals: { breakfast: false, lunch: false, dinner: false, snack: false, dessert: false },
     diet: { vegan: false, vegetarian: false, glutenFree: false, ketogenic: false, pescetarian: false, paleo: false },
     intolerances: [],
-    login_or_register: ""
+    login_or_register: "",
+    nutrition_widget: "no widget",
+    preferences_set: false,
+    history_recipe: "no recipe",
+    measurement_unit: "metric"
 }
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +42,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, recipes: action.payload }
         case "SET RECIPE ID":
             return { ...state, recipe_id: action.payload }
+        case "SET RECIPE":
+            return { ...state, recipe: action.payload }
         case "SET USER RECIPE HISTORY":
             return { ...state, users_recipe_history: action.payload }
         case "SET USER CALORIES":
@@ -59,8 +66,16 @@ const reducer = (state = initialState, action) => {
             return { ...state, random_recipe: action.payload }
         case "SET RANDOM FACT":
             return { ...state, random_fact: action.payload }
+        case "SET NUTRITION WIDGET":
+            return { ...state, nutrition_widget: action.payload }
+        case "SET HISTORY RECIPE":
+            return { ...state, history_recipe: action.payload }
+        case "SET MEASUREMENT UNIT":
+            return { ...state, measurement_unit: action.payload }
         case "SET USER STATE":
             return { ...state, user_state: action.payload }
+        case "SET PREFERENCES SET":
+            return { ...state, preferences_set: action.payload }
         case "SET LOGIN OR REGISTER":
             return { ...state, login_or_register: action.payload }
         default:
