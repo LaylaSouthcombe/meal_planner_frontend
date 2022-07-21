@@ -165,6 +165,7 @@ const NavBar = () => {
           {/* to remove when we can set user */}
           <li
             onClick={(e) => {
+              closeSideNav(e)
               onBtnClick(e);
             }}
           >

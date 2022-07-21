@@ -28,7 +28,9 @@ export const initialState = {
     intolerances: [],
     login_or_register: "",
     nutrition_widget: "no widget",
-    preferences_set: false
+    preferences_set: false,
+    history_recipe: "no recipe",
+    measurement_unit: "metric"
 }
 
 const reducer = (state = initialState, action) => {
@@ -63,6 +65,10 @@ const reducer = (state = initialState, action) => {
             return { ...state, random_fact: action.payload }
         case "SET NUTRITION WIDGET":
             return { ...state, nutrition_widget: action.payload }
+        case "SET HISTORY RECIPE":
+            return { ...state, history_recipe: action.payload }
+        case "SET MEASUREMENT UNIT":
+            return { ...state, measurement_unit: action.payload }
         case "SET USER STATE":
             return { ...state, user_state: action.payload }
         case "SET PREFERENCES SET":

@@ -52,7 +52,6 @@ const createHtmlString = () => {
         newHtmlArray.push(stringItemHtmlArray)
         newHtmlString = newHtmlArray.join("")
     }
-
 }
     const emailShopping = async (e) => {
         e.preventDefault()
@@ -98,9 +97,9 @@ const createHtmlString = () => {
                     </div>
                 </div>
             )})}
-        <p>Predicted cost: {shoppingList.cost}</p>
+        <p data-testid="cost">Predicted cost: {shoppingList.cost}</p>
         <div className="shoppingListButton">
-                <button className="emailShoppingList" onClick={emailShopping}>Email me my shopping list</button>
+                <button className="emailShoppingList" data-testid="emailBtn" onClick={emailShopping}>Email me my shopping list</button>
         </div>
         <div className="emailConfirm" style={{visibility: emailMessageVisibility}}>
             <p>Email successful, check your inbox!</p>

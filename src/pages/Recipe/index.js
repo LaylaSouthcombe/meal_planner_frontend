@@ -16,6 +16,8 @@ const Recipe = () => {
     const stateRecipeId = useSelector(state => state.recipe_id);
     const stateMealPlanRecipes = useSelector(state => state.meal_plan_recipes);
     const stateRandomRecipe = useSelector(state => state.random_recipe);
+    let stateMeasurementUnit = useSelector(state => state.measurement_unit);
+    
     // console.log(stateRandomRecipe)
     // console.log(stateRecipeId)
     const stateNutritionWidget = useSelector(state => state.nutrition_widget);
@@ -57,6 +59,17 @@ const Recipe = () => {
     }
 
     // console.log(recipe.fave)
+    const setUnit = (e) => {
+        console.log(e.target.id)
+        if(e.target.id === "metric"){
+            stateMeasurementUnit = "us"
+        }
+        if(e.target.id === "us"){
+            stateMeasurementUnit = "metric"
+        }
+        console.log(e.target.id)
+        dispatch({ type: "SET MEASUREMENT UNIT", payload: stateMeasurementUnit })
+    }
 
     return (
         <>{recipe.title.length && (
@@ -73,8 +86,8 @@ const Recipe = () => {
                         <li>Ready in <br /> {recipe.readyInMinutes} minutes</li>
                         <li>{recipe.servings} <br /> servings</li>
                     </ul>
-                    <div className="conversion">Toggle</div>
-                    <div className="servingCalc">Serving calc</div>
+                    <div className="conversion" id={stateMeasurementUnit} onClick={setUnit}>
+                        Toggle</div>
                 </div>
                 <div className="recipeIngredients">
                     <h2>Ingredient list</h2>
@@ -83,7 +96,8 @@ const Recipe = () => {
                             {recipe.extendedIngredients.map(ingredient => {
                                 return (
                                     <li>
-                                        {ingredient.original}
+                                        {stateMeasurementUnit === "metric" && (`${ingredient.measures.metric.amount} ${ingredient.measures.metric.unitShort} ${ingredient.name}`)}
+                                        {stateMeasurementUnit === "us" && (`${ingredient.measures.us.amount} ${ingredient.measures.us.unitShort} ${ingredient.name}`)}
                                     </li>
                                 )
                             })}

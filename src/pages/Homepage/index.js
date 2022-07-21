@@ -32,7 +32,7 @@ const Homepage = () => {
           <li>Generate shopping list</li>
         </ul>
         </div>
-        <div className="loginSignup" onClick={() => navigate('/login')}>
+        <div className="loginSignup" data-testid="navLog" onClick={() => navigate('/login')}>
           <p>Sign up or</p>
           <p>log in</p>
         </div>

@@ -12,57 +12,38 @@ const LoginComponent = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const backendUrl = "https://mealplannerserver.herokuapp.com/";
-  
+
   const getUserMealHistory = async () => {
     const { data } = await axios.get(
       `${backendUrl}mealhistory/`);
-      console.log(data)
-      dispatch({ type: "SET USER RECIPE HISTORY", payload: data });
+    console.log(data[0].recipes)
+    dispatch({ type: "SET USER RECIPE HISTORY", payload: data });
+    // dispatch({ type: "SET MEAL PLAN RECIPES", payload: data[0].recipes });
   }
 
   const getUserPreferences = async () => {
     const { data } = await axios.get(
       `${backendUrl}prefs/`);
-      console.log(data)
-      // const calorieLimits = data[0].calories_limit
-      const budgets = data[0].budget
-      const intolerences = data[0].intolorences
-      const userMeals = data[1]
-      console.log("user meals", userMeals)
-      // console.log("calories limit", calorieLimits)
-      console.log("budget", budgets)
-      console.log("intolerances", intolerences)
-      // const formattedCaloriesString = calorieLimits.replaceAll(`'`, `"`)
-      // console.log("formatted calories", formattedCaloriesString)
-      const formattedbudgetsString = budgets.replaceAll(`'`, `"`)
-      console.log("formatted budgets", formattedbudgetsString)
-      // const caloriesObj = JSON.parse(formattedCaloriesString)
-      const budgetObj = JSON.parse(formattedbudgetsString)
-      // console.log("caloriesObj", caloriesObj)
-      console.log("budgetObj", budgetObj)
-      // dispatch({ type: "SET USER CALORIES", payload: caloriesObj });
-      dispatch({ type: "SET USER BUDGETS", payload: budgetObj });
-      dispatch({ type: "SET USER MEALS", payload: userMeals });
+    console.log(data)
+    const budgets = data[0].budget
+    const intolerences = data[0].intolorences
+    const userMeals = data[1]
+    // const formattedCaloriesString = calorieLimits.replaceAll(`'`, `"`)
+    // console.log("formatted calories", formattedCaloriesString)
+    const formattedbudgetsString = budgets.replaceAll(`'`, `"`)
+    console.log("formatted budgets", formattedbudgetsString)
+    // const caloriesObj = JSON.parse(formattedCaloriesString)
+    const budgetObj = JSON.parse(formattedbudgetsString)
+    // console.log("caloriesObj", caloriesObj)
+    console.log("budgetObj", budgetObj)
+    // dispatch({ type: "SET USER CALORIES", payload: caloriesObj });
+    dispatch({ type: "SET USER BUDGETS", payload: budgetObj });
+    dispatch({ type: "SET USER MEALS", payload: userMeals });
+    dispatch({ type: "SET USER INTOLERANCES", payload: intolerences });
   }
-//   [
-//     {
-//         "calories_limit": "{'breakfast': 500, 'lunch': 600, 'dinner': 700, 'snack': 200, 'dessert': 0}",
-//         "intolorences": [
-//             "dairy"
-//         ],
-//         "budget": "{'breakfast': 2, 'lunch': 2, 'dinner': 3, 'snack': 2, 'dessert': 0}"
-//     },
-//     {
-//         "breakfast": true,
-//         "lunch": true,
-//         "dinner": true,
-//         "dessert": false,
-//         "snack": true
-//     }
-// ]
+
   const handleSignIn = async (e) => {
     e.preventDefault();
-    
     const route = "login/";
     try {
       if (email === "" || password === "") {
@@ -77,17 +58,11 @@ const LoginComponent = () => {
             headers: { "Content-Type": "application/json" },
           }
         );
-        //get meal history
         await getUserMealHistory()
-        //TODO: set to history state
-        //TODO: set first in array to meal plane
         await getUserPreferences()
-        //get preferences
-        
         dispatch({ type: "SET LOGIN OR REGISTER", payload: "login" });
         dispatch({ type: "SET USER STATE", payload: true });
         dispatch({ type: "SET PREFERENCES SET", payload: true });
-        
         navigate("/MealPlan");
       }
     } catch (err) {

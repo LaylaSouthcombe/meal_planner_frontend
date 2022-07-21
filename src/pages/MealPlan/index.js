@@ -280,10 +280,11 @@ const MealPlan = () => {
         const options = {
             "items": shoppingItems
         }
-        const { data } = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
+        const {data} = await axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${apiKey}`, JSON.stringify(options), { headers: { 'Content-Type': 'application/json' } })
         console.log(data)
         shoppingList = data
     }
+
     const generateShoppingList = async (e) => {
         e.preventDefault()
         let items = []
@@ -311,40 +312,45 @@ const MealPlan = () => {
     const submitMealPlan = async (e) => {
         e.preventDefault()
         let recipesToSendToDb = { today_date: "", recipes: { breakfast: [], lunch: [], dinner: [], dessert: [], snacks: []}}
-        for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
-            for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
-                let currentRecipe = Object.values(stateMealRecipes)[i][j]
-                currentRecipe.lock = true
-                let mealEntry = {id: `${currentRecipe.id}`, title: currentRecipe.title, image: currentRecipe.image, fave: currentRecipe.fave}
-                if(Object.keys(stateMealRecipes)[i] === "breakfast"){
-                    recipesToSendToDb.recipes.breakfast.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "lunch"){
-                    recipesToSendToDb.recipes.lunch.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "dinner"){
-                    recipesToSendToDb.recipes.dinner.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "dessert"){
-                    recipesToSendToDb.recipes.dessert.push(mealEntry)
-                }
-                if(Object.keys(stateMealRecipes)[i] === "snacks"){
-                    recipesToSendToDb.recipes.snacks.push(mealEntry)
+        try {
+
+            for (let i = 0; i < Object.keys(stateMealRecipes).length; i++) {
+                for (let j = 0; j < Object.values(stateMealRecipes)[i].length; j++) {
+                    let currentRecipe = Object.values(stateMealRecipes)[i][j]
+                    currentRecipe.lock = true
+                    let mealEntry = {id: `${currentRecipe.id}`, title: currentRecipe.title, image: currentRecipe.image, fave: currentRecipe.fave}
+                    if(Object.keys(stateMealRecipes)[i] === "breakfast"){
+                        recipesToSendToDb.recipes.breakfast.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "lunch"){
+                        recipesToSendToDb.recipes.lunch.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "dinner"){
+                        recipesToSendToDb.recipes.dinner.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "dessert"){
+                        recipesToSendToDb.recipes.dessert.push(mealEntry)
+                    }
+                    if(Object.keys(stateMealRecipes)[i] === "snacks"){
+                        recipesToSendToDb.recipes.snacks.push(mealEntry)
+                    }
                 }
             }
+            dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
+            let today = new Date();
+            
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            today = dd + '/' + mm + '/' +  yyyy;
+            recipesToSendToDb.today_date = today
+            console.log(recipesToSendToDb)
+            const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/mealhistory/`, JSON.stringify(recipesToSendToDb))
+            stateUsersRecipesHistory.unshift(recipesToSendToDb)
+            setGenerateText("Generate new meal plan")
+        }catch(err){
+            console.log(err)
         }
-        dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
-        let today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        today = dd + '/' + mm + '/' +  yyyy;
-        recipesToSendToDb.today_date = today
-        const { data } = await axios.post(`https://mealplannerserver.herokuapp.com/mealhistory/`, JSON.stringify(recipesToSendToDb))
-        stateUsersRecipesHistory.unshift(recipesToSendToDb)
-        //confirmation message saying can now view shopping list
-        
-        setGenerateText("Generate new meal plan")
     }
 
 
@@ -355,11 +361,11 @@ const MealPlan = () => {
             {stateSetPreferences === true && (
                 <div className="mealPlanButtons">
                     <div className="generateMeal">
-                        <button data-testId="getMealsBtn" onClick={getMeals}>{generateText}</button>
+                        <button data-testid="getMealsBtn" onClick={getMeals}>{generateText}</button>
                     </div>
                     {(stateMealRecipes.breakfast.length !== 0 || stateMealRecipes.lunch.length !== 0 || stateMealRecipes.dinner.length !== 0 || stateMealRecipes.dessert.length !== 0 || stateMealRecipes.snacks.length !== 0 ) && (
                     <div className="shoppingListBtn">
-                        <button onClick={generateShoppingList}>Shopping list</button>
+                        <button data-testid="shoppingListBtn" onClick={generateShoppingList}>Shopping list</button>
                     </div>
             )}
                 </div>
@@ -368,7 +374,7 @@ const MealPlan = () => {
             <div className="ConditionlMealMessages">
             {(stateSetPreferences === false ) && (
                     <div className="noPreferences">
-                        <p>You haven't set your preferences yet, set them <span onClick={() => navigate('/preferences')}>here</span></p>
+                        <p>You haven't set your preferences yet, set them <span data-testid="prefNav" onClick={() => navigate('/preferences')}>here</span></p>
                     </div>
                 )}
             {(stateSetPreferences === true && stateMealRecipes.breakfast.length === 0 && stateMealRecipes.lunch.length === 0 && stateMealRecipes.dinner.length === 0 && stateMealRecipes.dessert.length === 0 && stateMealRecipes.snacks.length === 0 ) && (
@@ -377,7 +383,7 @@ const MealPlan = () => {
                 </div>
             )}
             </div>
-            <div className="recipesMealPlan">
+            <div className="recipesMealPlan" data-testid="mealDivs">
                 {stateMealRecipes.breakfast.length > 0 && (
                     <CollapsibleRecipes meal={"breakfast"} fullRecipes={stateMealRecipes} triggerName="Breakfast" page="mealplan"/>
                 )}
@@ -395,7 +401,7 @@ const MealPlan = () => {
                 )}
             </div>
             {(stateMealRecipes.breakfast.length !== 0 || stateMealRecipes.lunch.length !== 0 || stateMealRecipes.dinner.length !== 0 || stateMealRecipes.dessert.length !== 0 || stateMealRecipes.snacks.length !== 0 ) && (
-                <div className="submitMealPlan" onClick={submitMealPlan}>Submit meal plan</div>
+                <div className="submitMealPlan" data-testid="submitMeal" onClick={submitMealPlan}>Submit meal plan</div>
             )}
         </>
     )

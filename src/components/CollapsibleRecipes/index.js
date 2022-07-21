@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 import './style.css'
 import Collapsible from 'react-collapsible';
 
-const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, date }) => {
+import apiKey from '../../'
+
+const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
+console.log(page)
 
-  // console.log("this is favourited " + favourited)
-
-  const viewFullRecipe = (e) => {
+  const viewFullRecipe = async (e) => {
     const parentClassName = e.target.parentElement.className
     const splitString = parentClassName.split(' ')
     const recipeIdStr = splitString[1]
     const newRecipeId = parseInt(recipeIdStr)
     dispatch({ type: "SET RECIPE ID", payload: newRecipeId })
+    // if(page === "history") {
+    //   const url = `https://api.spoonacular.com/recipes/?apiKey=${apiKey}/${newRecipeId}/information?includeNutrition=false`
+    //   const { data } = await axios.get(url)
+    //   console.log(data)
+    //   dispatch({ type: "SET HISTORY RECIPE", payload: data })
+    // }
     navigate("/recipe")
   }
-  // console.log("meal recipes", mealRecipes)
-  // console.log("recipes in collapsible", fullRecipes)
-
-  // console.log(fullRecipes[meal])
 
   const faveFilter = () => {
     const faveRecipe = document.querySelectorAll('#target')
@@ -41,15 +45,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
     )
   }
 
-
-
-
-  // TODO:add conditional that if user meals is same as initial state, do a calculateNewValue, if not set meal recipes to state recipes
-  // const [mealRecipes, setMealRecipes] = useState(recipes)
-  // causing an error, shouldn't when added to useEffect
-  // dispatch({ type: "SET MEAL PLAN RECIPES", payload: recipes})
-
-  // console.log(fullRecipes[meal])
   const changeLockRecipe = (e) => {
     const parentClassName = e.target.parentElement.className
     const lockClassName = e.target.className
@@ -72,7 +67,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
     dispatch({ type: "SET MEAL PLAN RECIPES", payload: fullRecipes })
   }
 
-  // copy to recipe page
   const changefaveRecipe = (e) => {
     const parentClassName = e.target.parentElement.className
     const faveClassName = e.target.className
@@ -84,12 +78,10 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
         if (fullRecipes[meal][i].id === faveRecipeIdInt) {
           if (faveClassName === "faved") {
             fullRecipes[meal][i].fave = false
-            console.log(fullRecipes[meal][i].fave)
             e.target.className = "unfaved"
           }
           if (faveClassName === "unfaved") {
             fullRecipes[meal][i].fave = true
-            console.log(fullRecipes[meal][i].fave)
             e.target.className = "faved"
           }
         }
@@ -100,13 +92,10 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
         if (fullRecipes[meal][i].id === faveRecipeIdStr) {
           if (faveClassName === "faved") {
             fullRecipes[meal][i].fave = false
-            console.log(date)
             e.target.className = "unfaved"
           }
           if (faveClassName === "unfaved") {
             fullRecipes[meal][i].fave = true
-            console.log(fullRecipes[meal][i].fave)
-            console.log(date)
             e.target.className = "faved"
           }
         }
@@ -121,7 +110,6 @@ const CollapsibleRecipes = ({ favourited, fullRecipes, triggerName, meal, page, 
       <Collapsible trigger={triggerName}>
         {fullRecipes[meal].map(recipe => {
           return (
-
             <div id="target" key={recipe.id} className={"recipe " + recipe.id}>
               {faveFilter()}
               <div className={"recipeInfoCard " + recipe.id} data-testid="recipe" onClick={viewFullRecipe}>

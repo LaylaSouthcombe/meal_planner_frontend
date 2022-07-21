@@ -1,47 +1,51 @@
-import { render, waitFor } from "@testing-library/react";
-import Fact from ".";
-
-
-// describe('Fact Component', () => { 
-//     it('should render Facts when api responds', async () => {
-//         render(<Fact />);
-//         await waitFor(() => {
-//             screen.getByRole("paragraph".toBeInTheDocument())
-//         })
-//     })
-// })
-
 import { default as Fact } from ".";
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as router from "react-router";
 import { Provider } from "react-redux";
 import store from "../../store";
-import reducer from '../../reducers'
 import onBtnClick from './index'
 import "@testing-library/jest-dom";
 import axios from 'axios';
+import reducer  from "../../reducers/reducer";
+import { initialState }  from "../../reducers/reducer";
+import { createStore } from "redux";
+jest.mock('axios');
 
+// describe("Fact", () => {
+//   const navigate = jest.fn();
+//   const fact = (
+//     <Provider store={store}>
+//       <Router>
+//         <Fact />
+//       </Router>
+//     </Provider>
+//   );
 
-describe("Fact", () => {
-  const navigate = jest.fn();
-  const Fact = (
-    <Provider store={store}>
-      <Router>
-        <Fact />
-      </Router>
-    </Provider>
-  );
+//   beforeEach(() => {
+//     jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+//     render(fact);
+//   });
 
-  beforeEach(() => {
-    jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
-    render(Fact);
+// });
+
+function renderWithProviders(ui, { reduxState } = {}) {
+  const store = createStore(reducer, reduxState || initialState);
+  return render(<Provider store={store}><Router>{ui}</Router></Provider>);
+}
+describe("Fact axios", () => {
+  const dummyResponse = ["fact"]
+  test("gets random fact", async () => {
+    renderWithProviders(<Fact />, {
+      reduxState: {
+        random_fact: "fact.",
+        random_recipe: { title: "no recipe" }
+      }
+    });
+      // axios.get.mockResolvedValue({data: dummyResponse})
+      // const response = await waitFor(() => screen.getAllByTestId(/randomFact/i))
+      // expect(response).toHaveLength(1)
+      const resp = { data: [{ name: 'FooBar' }]};
+     axios.get.mockImplementation(() => Promise.resolve(resp));
   });
-
-  test("it renders the button 'Logout' ", () => {
-    const link = screen.getByRole("paragraph").toBeInTheDocument();
-    expect(link).toBeTruthy();
-
-    })
-
-});
+})

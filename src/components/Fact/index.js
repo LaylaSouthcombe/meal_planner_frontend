@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import './style.css'
@@ -6,7 +6,6 @@ import './style.css'
 import apiKey from '../../'
 
 const Fact = () => {
-  
     let randomFact
     const dispatch = useDispatch()
 
@@ -32,11 +31,11 @@ const Fact = () => {
       randomFact = stateRandomFact
     }
   
-    return (
+  return (
     <>
       {stateRandomFact !== "no fact" && (
         <div className="fact">
-            <p>{randomFact}</p>
+            <p data-testid="randomFact">{randomFact}</p>
         </div>
       )}
     </>
