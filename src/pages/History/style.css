@@ -1,0 +1,44 @@
+.historyH1{
+    text-align: center;
+    color: #EA5E5E;
+    padding-bottom: 20px;
+    padding-top: 50px;
+}
+
+.shoppingListBtn > button {
+    background-color: #F97F7F;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #19323B;
+    font-weight: bold;
+}
+.faveBtn{
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 20px;
+}
+.faveBtn > button {
+    background-color: #F97F7F;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #19323B;
+    font-weight: bold;
+}
+.week {
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+.Collapsible__contentInner > .Collapsible {
+    background-color: rgb(182, 219, 215);
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.Collapsible__contentInner > .Collapsible > .Collapsible__contentOuter {
+    background-color: rgb(243, 253, 252);
+}

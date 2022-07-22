@@ -1,37 +1,80 @@
 .Collapsible {
-    background-color: aquamarine;
+    background-color: #85bba0;
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #19323B;
 }
 .Collapsible__trigger{
-    background-color: bisque;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    display:inline-block;
+}
+.Collapsible__contentOuter{
+    background-color: #f9fffd;
 }
 .recipe {
-    background-color: aliceblue;
+    background-color: #EAEEEC;
     display: flex;
+    border-radius: 10px;
+    width: 95%;
+    margin: 10px auto;
+    padding: 5px;
+    justify-content: space-between;
 }
 .recipeCardImg {
-    width: 100px;
+    width: 90px;
+    height: 70px;
+    border-radius: 10px;
+    border: 3px solid #F97F7F;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .unlocked {
-    background-color: aqua;
     background-image: url('../../images/openLock.png');
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px
 }
 .locked {
-    background-color: rgb(175, 107, 189);
     background-image: url('../../images/closedLock.png');
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px
 }
 .unfaved {
-    background-color: aqua;
     background-image: url('../../images/emptyHeart.png');
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px
 }
 .faved {
-    background-color: rgb(175, 107, 189);
     background-image: url('../../images/filledHeart.png');
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px
+}
+.recipeInfoCard{
+    display: flex;
+}
+.recipeInfoCard > h3{
+    width: 130px;
+    padding-left: 5px;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    color: #19323B;
+}
+.recipeIcon{
+    display: flex;
+    margin-right: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.recipeIcon > div {
+    margin: 5px;
 }

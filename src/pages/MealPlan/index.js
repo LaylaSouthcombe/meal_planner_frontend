@@ -24,7 +24,7 @@ const MealPlan = () => {
     const stateMealRecipes = useSelector(state => state.meal_plan_recipes)
     const stateUsersRecipesHistory = useSelector(state => state.users_recipe_history)
     const stateBudgets = useSelector(state => state.user_budget)
-    const stateCalories = useSelector(state => state.user_calorie_limits)
+    // const stateCalories = useSelector(state => state.user_calorie_limits)
     console.log("state budgets", stateBudgets)
     console.log("state meal plan recipes at render", stateMealRecipes)
 
@@ -147,7 +147,6 @@ const MealPlan = () => {
 
     let unlockedMeals = [[], [], [], [], []]
 
-
     const getMeals = async (e) => {
         e.preventDefault()
         let numberOfUnlocked = 0
@@ -266,7 +265,6 @@ const MealPlan = () => {
                     }
                 }
             }
-
         }
 
         dispatch({ type: "SET RECIPES", payload: newRecipes })
@@ -336,6 +334,7 @@ const MealPlan = () => {
                     }
                 }
             }
+            console.log(stateMealRecipes)
             dispatch({ type: "SET MEAL PLAN RECIPES", payload: stateMealRecipes })
             let today = new Date();
             
@@ -357,7 +356,7 @@ const MealPlan = () => {
 //TODO: add last meal in meal history to meal plan on sign in
     return (
         <>
-            <h1>Meal Plan</h1>
+            <h1 className="mealPlanH1">Meal plan</h1>
             {stateSetPreferences === true && (
                 <div className="mealPlanButtons">
                     <div className="generateMeal">
@@ -403,6 +402,9 @@ const MealPlan = () => {
             {(stateMealRecipes.breakfast.length !== 0 || stateMealRecipes.lunch.length !== 0 || stateMealRecipes.dinner.length !== 0 || stateMealRecipes.dessert.length !== 0 || stateMealRecipes.snacks.length !== 0 ) && (
                 <div className="submitMealPlan" data-testid="submitMeal" onClick={submitMealPlan}>Submit meal plan</div>
             )}
+            <div className="succesfulMealSub">
+
+            </div>
         </>
     )
 };

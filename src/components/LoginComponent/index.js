@@ -31,10 +31,12 @@ const LoginComponent = () => {
     const { data } = await axios.get(
       `${backendUrl}prefs/`);
     console.log(data)
-    if(!"error" in data){
+    // if(!"error" in data){
       const budgets = data[0].budget
       const intolerences = data[0].intolorences
-      const userMeals = data[1]
+      const userMeals = data[8]
+      //TODO: should be [0], but the data in db needs to be wiped
+
       // const formattedCaloriesString = calorieLimits.replaceAll(`'`, `"`)
       // console.log("formatted calories", formattedCaloriesString)
       const formattedbudgetsString = budgets.replaceAll(`'`, `"`)
@@ -47,7 +49,7 @@ const LoginComponent = () => {
       dispatch({ type: "SET USER BUDGETS", payload: budgetObj });
       dispatch({ type: "SET USER MEALS", payload: userMeals });
       dispatch({ type: "SET USER INTOLERANCES", payload: intolerences });
-    }
+    // }
   }
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -104,6 +106,7 @@ const LoginComponent = () => {
 
   return (
     <>
+        <h1 className="LoginHeader">Login</h1>
       <div className="login2">
         <form
           aria-label="login"
@@ -111,7 +114,6 @@ const LoginComponent = () => {
           className="loginForm"
           onSubmit={handleSignIn}
         >
-          <h1 className="LoginHeader">Login</h1>
           <div
             data-testid="error"
             className="loginError"
@@ -151,7 +153,7 @@ const LoginComponent = () => {
         </form>
         <div className="btndiv2">
           <button
-            className="haveAccount2"
+            className="haveAccount2" id="loginBtn"
             data-testid="button1"
             onClick={() => navigate("/register")}
           >

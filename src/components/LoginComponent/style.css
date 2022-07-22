@@ -3,11 +3,28 @@
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  background-color: #b0c8bc;
+  background-color: #85bba0;
   border-radius: 15px;
   width: 280px;
-  padding: 20px 20px;
-  height: fit-content;
+  padding: 10px 10px;
+  align-items: flex-start;
+}
+
+.signUp2 {
+  height: 580px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.signUp {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 180px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+
 }
 
 .btndiv2 {
@@ -15,6 +32,7 @@
   display: flex;
   justify-content: center;
 }
+
 
 .login2 {
   height: 620px;
@@ -32,13 +50,7 @@
   border: none;
 }
 
-.loginForm > input {
-  height: 40px;
-  width: 260px;
-  border-radius: 10px;
-  outline: none;
-  border: none;
-}
+
 
 input[type="text"]:focus {
   border: 3px solid #555;
@@ -46,25 +58,45 @@ input[type="text"]:focus {
 
 .loginForm > label {
   display: block;
-  margin: 10px 0px;
+  margin: 0 auto;
   width: fit-content;
   font-size: 20px;
   border: 10px;
+  padding: 7.5px;
 }
 
 .Login {
+  margin: 0 auto;
   margin-top: 20px;
-  width: 200px;
+  width: 180px;
   padding: 10px 15px;
   border-radius: 10px;
   border: none;
+}
+
+.loginForm > input {
+  height: 40px;
+  width: 240px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  margin: 0 auto;
 }
 
 .loginError {
   margin-top: 10px;
   color: red;
 }
+.LoginHeader{
+  text-align: center;
+  color: #EA5E5E;
+}
+.registerHeader{
+  text-align: center;
+    color: #EA5E5E;
+}
 
-.haveAccount2:hover {
-  background-color: blue;
+#loginBtn {
+  margin-bottom: 100px;
 }

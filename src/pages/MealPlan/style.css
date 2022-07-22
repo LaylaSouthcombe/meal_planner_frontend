@@ -1,10 +1,61 @@
 .recipesMealPlan{
     margin-top: 30px;
+    /* flex-grow: 1; */
 }
 .submitMealPlan{
-    background-color: yellow;
+    background-color: #EA5E5E;
     width: 50%;
-    margin: 20px auto;
+    margin: 180px auto 40px auto;
     text-align: center;
     padding: 10px;
+    border-radius: 10px;
+}
+.noPreferences{
+    background-color:#EAFBEA;
+    height: 230px;
+    border-radius: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+.noPreferences > p{
+    font-size: 28px;
+    text-align: center;
+    margin-top: 70px;
+    color: #19323B;
+    font-weight: bold;
+    padding: 35px;
+}
+.mealPlanH1{
+    text-align: center;
+    color: #EA5E5E;
+    padding-bottom: 20px;
+    padding-top: 50px;
+}
+.noPreferences > p > span{
+    color: #3A6575;
+}
+
+.mealPlanButtons{
+    display: flex;
+    justify-content: space-around;
+}
+.generateMeal > button {
+    background-color: #F97F7F;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #19323B;
+    font-weight: bold;
+    width: 175px;
+    margin-top: 20px;
+}
+.shoppingListBtn > button {
+    background-color: #F97F7F;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #19323B;
+    font-weight: bold;
+    width: 175px;
+    margin-top: 20px;
 }
