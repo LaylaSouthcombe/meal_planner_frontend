@@ -71,8 +71,12 @@
 .recipeOfDay{
     background-color: #EAFBEA;
 }
+.hompageInstructionsDiv {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 .hompageInstructionsDiv > p {
-    margin-top: 30px;
+    margin:1.5rem 0;
     color: #19323B;
     text-align: center;
     font-weight: bold;
@@ -83,7 +87,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 20px;
+    margin: 2rem auto;
+    max-width: 600px;
 }
 .hompageInstructionsImg {
     width: 30%;
@@ -100,6 +105,8 @@
 }
 .hompageInstructions > li > img {
     width: 100%;
+}
+.hompageInstructionsImg > img {
     transform: scale(1.25)
 }
 .hompageInstructionsStep {
@@ -111,7 +118,7 @@
 
 .randomFact {
     background-color: #EAFBEA;
-    margin-top: 20px;
+    padding: 1.5rem 0;
 }
 .randomFact > p {
     color: #EA5E5E;
@@ -120,4 +127,13 @@
     padding-bottom: 20px;
     font-size: 26px;
     font-weight: bold;
+}
+.fact {
+    max-width: 800px;
+    margin: 0 auto;
+}
+@media (min-width: 768px) {
+    .hompageInstructionsImg, .hompageInstructionsImg2 {
+        width: 25%;
+    }
 }
