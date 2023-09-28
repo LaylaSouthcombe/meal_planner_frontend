@@ -5,23 +5,6 @@ import Shopping from './index';
 import { MemoryRouter } from "react-router-dom";
 import '@testing-library/jest-dom/extend-expect';
 
-
-// describe("Renders Footer elements", () =>{
-//     const list = {aisles: Array(15), cost: 3023.26}
-
-//     beforeEach(() => {
-//         render(<Shopping shoppingList={list} />)
-//     })
-    
-//     test("Render li element",()=>{
-//         const li = screen.getByRole('link',{name:"Layla Southcombe"})
-//         expect(li).toBeInTheDocument()
-//         expect(li.textContent).toBe('LaylaSouthcombe')
-//     })
-
-    
-// })
-// jest.mock(Shopping)
     describe("Renders shopping list", () =>{
         const shoppingList = {
             "aisles": [

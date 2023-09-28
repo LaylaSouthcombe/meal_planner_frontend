@@ -32,7 +32,6 @@ const ShoppingComponent = ({ shoppingList }) => {
                         <tbody>`)
             }
             for (let j = 0; j < shoppingList.aisles[i].items.length; j++) {
-                // console.log(shoppingList.aisles[i].items)
                 let aisleItem = shoppingList.aisles[i].items[j]
                 {
                     itemHtmlArray.push(`<tr className=${"a" + i + "tableRow" + j}>
@@ -70,7 +69,7 @@ const ShoppingComponent = ({ shoppingList }) => {
     }
 
     return (
-        <>
+        <div className="shoppingList">
             {shoppingList.aisles.map((aisle, i) => {
                 return (
                     <div id={"aisle" + i}>
@@ -85,7 +84,7 @@ const ShoppingComponent = ({ shoppingList }) => {
                                         <th id="aTitleCost5">Cost</th>
                                     </tr>
                                 </thead>
-                                <tbody >
+                                <tbody>
                                     {aisle.items.map((aisleItem, j) => {
                                         return (
                                             <tr className={"a" + i + "tableRow" + j}>
@@ -109,7 +108,7 @@ const ShoppingComponent = ({ shoppingList }) => {
             <div className="emailConfirm" style={{ visibility: emailMessageVisibility }}>
                 <p id='emailP5'>Email successful, check your inbox!</p>
             </div>
-        </>
+        </div>
     )
 
 };

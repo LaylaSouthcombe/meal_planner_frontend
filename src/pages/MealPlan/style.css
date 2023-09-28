@@ -1,6 +1,5 @@
 .recipesMealPlan{
     margin-top: 30px;
-    /* flex-grow: 1; */
 }
 .submitMealPlan{
     background-color: #EA5E5E;
@@ -33,11 +32,21 @@
 }
 .noPreferences > p > span{
     color: #3A6575;
+    cursor: pointer;
 }
-
+.ConditionlMealMessages {
+    max-width: 600px;
+    margin: 1rem auto;
+    text-align: center;
+}
 .mealPlanButtons{
     display: flex;
+    max-width: 800px;
+    margin: 0 auto;
     justify-content: space-around;
+}
+.mealPlanButtons button {
+    cursor: pointer;
 }
 .generateMeal > button {
     background-color: #F97F7F;

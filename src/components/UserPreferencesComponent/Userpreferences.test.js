@@ -29,8 +29,6 @@ describe("meals-section checkbox tests", () => {
     test("it renders the form ", () => {
         const form = screen.getByTestId('onsubmit');
         expect(form).toBeInTheDocument()
-        // fireEvent.click(button);
-        // expect(navigate).toHaveBeenCalledWith("/");
     });
 
 
@@ -104,11 +102,9 @@ describe("meals-section checkbox tests", () => {
 
     test("checks output of form ", () => {
         const form = screen.getByTestId('onsubmit');
-        // expect(form).toBeInTheDocument()
         const p = screen.getByTestId("p");
         fireEvent.submit(form);
         expect(p).not.toBeVisible()
-        // expect(navigate).toHaveBeenCalledWith("/");
     });
 
 })

@@ -33,8 +33,6 @@ describe("NavBar", () => {
   test("it renders the button 'Logout' ", () => {
     const link = screen.getByText(/logout/i);
     expect(link).toBeTruthy();
-    // fireEvent.click(button);
-    // expect(navigate).toHaveBeenCalledWith("/");
   });
 
   test("the link takes you to the home page", () => {
@@ -101,15 +99,7 @@ describe("NavBar", () => {
     expect(side2).toHaveStyle("display: none");
   });
 
-  // test("it takes you to recipe page and sets recipe state id ", () => {
-  //   const side = screen.getByTestId("side");
-  //   const side2 = screen.getByTestId("modal");
-  //   // fireEvent.click(side);
-
-  //   expect(side2).toHaveStyle("display: none");
-  // });
-
-  test("it takes you to recipe page and sets recipe state id ", () => {
+  test("it takes you to recipe page and sets recipe state id  ", () => {
     const side = screen.getByTestId("side");
     const side2 = screen.getByTestId("modal");
     fireEvent.click(side);
@@ -139,11 +129,6 @@ describe("api Navbar", () => {
 
   test("test api ", async () => {
     const side = screen.getByTestId("side");
-    const side2 = screen.getByTestId("modal");
     fireEvent.click(side);
-    // const averagePrice = await onBtnClick(fireEvent.click(side));
-    // expect(side.classList).toContain("navIcon", "navIconBorder");
-    // expect(averagePrice).toEqual({ 'message': 'User logged out' });
-    // expect(side2).toHaveStyle("display: block");
   });
 });

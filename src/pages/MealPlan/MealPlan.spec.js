@@ -1346,9 +1346,7 @@ describe("MealPlan redux 2", () => {
               preferences_set: true
             }
           });
-        // MealPlan.sendShoppingItems = jest.fn()
         const shoppingListBtn = await screen.findByTestId(/shoppingListBtn/i)
         fireEvent.click(shoppingListBtn)
-        // expect(Shopping.sendShoppingItems.mock).toBeTruthy();
     });
 })

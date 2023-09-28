@@ -10,26 +10,17 @@ import apiKey from '../../'
 
 const MealPlan = () => {
 
-    const state = useSelector((state) => state.user_state);
-    console.log(state)
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const stateSetPreferences = useSelector((state) => state.preferences_set);
-    console.log(stateSetPreferences)
 
     const [generateText, setGenerateText] = useState("Generate meal plan")
 
-    // if no result, render message to generate plan
-    // if result, render meal plan
     const stateMealRecipes = useSelector(state => state.meal_plan_recipes)
     const stateUsersRecipesHistory = useSelector(state => state.users_recipe_history)
     const stateBudgets = useSelector(state => state.user_budget)
-    // const stateCalories = useSelector(state => state.user_calorie_limits)
-    console.log("state budgets", stateBudgets)
-    console.log("state meal plan recipes at render", stateMealRecipes)
 
     const stateRecipes = useSelector(state => state.recipes)
-    console.log("state recipes at render", stateRecipes)
 
     let viewedRecipes = []
 
@@ -353,7 +344,6 @@ const MealPlan = () => {
     }
 
 
-//TODO: add last meal in meal history to meal plan on sign in
     return (
         <>
             <h1 className="mealPlanH1">Meal plan</h1>

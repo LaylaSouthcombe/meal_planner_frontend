@@ -28,8 +28,6 @@ describe("Homepage", () => {
   test("it renders the button 'Logout' ", () => {
     const link = screen.getByText(/Set budget/i);
     expect(link).toBeTruthy();
-    // fireEvent.click(button);
-    // expect(navigate).toHaveBeenCalledWith("/");
   });
   test("it navigates you to login", () => {
     const navLog = screen.getByTestId(/navLog/i);

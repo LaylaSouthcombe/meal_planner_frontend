@@ -10,13 +10,15 @@
     padding-top: 10px;
     padding-bottom: 15px;
 }
-
+.shoppingList {
+    max-width: 800px;
+    margin: 0 auto;
+}
 #h25 {
     margin-left: 30px;
     padding-bottom: 10px;
     padding-top: 5px;
     font-size: 20px;
-    /* text-align: center; */
 }
 
 #tbody5 {
@@ -25,7 +27,6 @@
 
 th {
     font-size: 10px;
-    /* text-align: left; */
 }
 
 td {
@@ -72,6 +73,7 @@ td {
     padding: 10px 15px;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
 }
 
 

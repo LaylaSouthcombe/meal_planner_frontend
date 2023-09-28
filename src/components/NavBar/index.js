@@ -11,7 +11,6 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user_state);
 
-  const activeclass = ({ isActive }) => (isActive ? "active" : undefined);
   const backendUrl = "https://mealplannerserver.herokuapp.com/";
   const route = "logout/";
 
@@ -56,13 +55,9 @@ const NavBar = () => {
     if (display === "block") {
       setDisplay("none");
       setIconImg("fa fa-bars");
-      // setBodyBlur("none")
-      // setzIndex("0")
     } else {
       setDisplay("block");
       setIconImg("fa-solid fa-xmark");
-      // setBodyBlur("blur(5px)")
-      // setzIndex("-1")
     }
   };
   const closeSideNav = (e) => {

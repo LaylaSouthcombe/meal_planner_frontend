@@ -28,16 +28,7 @@ import apiKey from '../../'
     }
   
     const stateRandomRecipe = useSelector(state => state.random_recipe)
-    console.log(stateRandomRecipe)
-    //TODO:get from state
-    // let intoleranes = ["eggs", "milk"]
-    // let intolerancesParamsOld = ""
-    // for (let i = 0; i < intoleranes.length; i++) {
-    //     intolerancesParamsOld += `,${intoleranes[i]}`
-    // }
-    // let intolerancesParams = intolerancesParamsOld.substring(1)
 
-    //TODO:get from state
     let diet = { vegan: true, vegetarian: false, glutenFree: false, ketogenic: false, pescetarian: false, paleo: false }
 
     let dietParamsOld = ""
