@@ -1,18 +1,22 @@
 .sookiLogo{
     width: 240px;
     position: absolute;
-    top: 150px;
+    top: 30%;
     z-index: 4;
     left: 0;
     right: 0;
-    margin-right:auto;
+    margin-right: auto;
     margin-left: auto;
     
 }
 .sookiLogo > img {
     width: 100%;
 }
-
+.logoArea {
+    max-height: 300px;
+    overflow-y: hidden;
+    position: relative;
+}
 .hompageImg{
     width: 100%;
     position: relative;

@@ -1,9 +1,7 @@
 import React from "react";
-import { Joke } from '../../components';
 import { Fact } from '../../components';
 import { RandomRecipe } from '../../components';
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
 import homepageHero from '../../images/homepageHero.jpg'
 import homepageMeal from '../../images/homepageMeal.jpg'
 import homepageLogo from '../../images/sookiText.png'
@@ -17,10 +15,10 @@ const Homepage = () => {
 
   return (
     <>
-    <div className="sookiLogo">
-      <img src={homepageLogo} alt="" />
-    </div>
       <div className="logoArea">
+        <div className="sookiLogo">
+          <img src={homepageLogo} alt="" />
+        </div>
         <div className="hompageImg">
           <img src={homepageHero} alt=""/>
           <div className="homeImgOverlay">0</div>
