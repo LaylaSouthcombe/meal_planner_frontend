@@ -11,10 +11,12 @@ header {
 
 .sookiNavLog{
     width: 150px;
+    display: flex;
+    align-items: center;
 }
 .sookiNavLog > img {
     width: 100%;
-    margin-top: 20px;
+    height: fit-content;
 }
 .active{
     font-weight: bold;
@@ -37,7 +39,7 @@ header {
 a:link {
     text-decoration: none;
 }
-
+a:visited { text-decoration: none; color:black; }
 .sidenav {
     display: flex;
     justify-content: flex-end;
@@ -179,6 +181,8 @@ a:link {
     .topnav {
         display: flex;
         width: 100%;
+        justify-content: flex-end;
+        padding-right: 1rem;
     }
 
     .navBar {

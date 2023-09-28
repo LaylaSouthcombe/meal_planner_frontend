@@ -10,7 +10,7 @@ import "./style.css";
 const NavBar = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user_state);
-  console.log(userState)
+
   const activeclass = ({ isActive }) => (isActive ? "active" : undefined);
   const backendUrl = "https://mealplannerserver.herokuapp.com/";
   const route = "logout/";
@@ -77,12 +77,92 @@ const NavBar = () => {
       <img src={sookiNavLog} alt="" />
     </div>
       <div className="topnav">
-        {/* <ul className="navBar" id="myLinks" >
-          <li><Link activeClass="active" onClick={(e) => { onBtnClick(e) }} offset={-180}><span className="number">01.</span> logout</Link></li>
-          <li><Link activeClass="active" onClick={navigate('/login')} offset={-180}><span className="number">02.</span> login</Link></li>
-          <li><Link activeClass="active" smooth spy to="projects" offset={-180}><span className="number">03.</span> Projects</Link></li>
-          <li><Link activeClass="active" smooth spy to="contact" offset={-180}><span className="number">04.</span> Contact Me</Link></li>
-        </ul> */}
+        <ul className="navBar" id="myLinks" >
+        <li>
+            <NavLink
+              activeclass="active"
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+              }}
+            >
+              Home
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              activeclass="active"
+              to="/mealplan"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/mealplan");
+              }}
+            >
+              Meal plan
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              activeclass="active"
+              to="/shoppinglist"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/shoppinglist");
+              }}
+            >
+              Shopping list
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              activeclass="active"
+              to="/history"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/history");
+              }}
+            >
+              History
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              activeclass="active"
+              to="/preferences"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/preferences");
+              }}
+            >
+              Preferences
+            </NavLink>
+          </li>
+
+          {userState === true && (
+          <li
+            onClick={(e) => {
+              onBtnClick(e);
+            }}
+          >
+            Logout
+          </li>
+          )}
+          {userState === false && (
+          <li
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/login");
+            }}
+          >
+            Login
+          </li>
+          )}
+        </ul>
       </div>
       <div className="sidenav">
         <button data-testid="side" className="navIcon" onClick={openSideNav}>

@@ -1,5 +1,4 @@
 import React from "react";
-// import ReactDOM from 'react-dom/client';
 import { Joke } from '../../components';
 import { Fact } from '../../components';
 import { RandomRecipe } from '../../components';
@@ -13,9 +12,9 @@ import cogs from '../../images/cogs.png'
 import './style.css'
 
 const Homepage = () => {
-  const state = useSelector((state) => state.user_state);
+
   const navigate = useNavigate();
-  console.log('state on homepage is' + state)
+
   return (
     <>
     <div className="sookiLogo">
