@@ -25,7 +25,9 @@ header {
 .topnav {
     display: none;
 }
-
+.navLogin {
+    cursor: pointer;
+}
 .navBar>li {
     padding: 1.5vw;
     margin-top: 5vh;

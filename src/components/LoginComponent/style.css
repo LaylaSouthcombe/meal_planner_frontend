@@ -9,7 +9,9 @@
   padding: 10px 10px;
   align-items: flex-start;
 }
-
+.Login {
+  cursor: pointer;
+}
 .signUp2 {
   height: 580px;
   display: flex;
@@ -32,7 +34,9 @@
   display: flex;
   justify-content: center;
 }
-
+.haveAccount2, .signUp {
+  cursor: pointer;
+}
 
 .login2 {
   height: 620px;

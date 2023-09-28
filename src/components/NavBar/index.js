@@ -148,7 +148,7 @@ const NavBar = () => {
           </li>
           )}
           {userState === false && (
-          <li
+          <li className="navLogin"
             onClick={(e) => {
               e.preventDefault();
               navigate("/login");
