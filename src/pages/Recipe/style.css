@@ -1,32 +1,32 @@
 .backButton {
     display: flex;
+    cursor: pointer;
 }
-
-.backButton>p {
+.backButton > p {
     font-size: 20px;
     width: 50px;
     line-height: 50px;
     margin-left: 10px;
 }
-
-.backButton>img {
+.backButton > img {
     width: 40px;
     margin-left: 10px;
 }
-
+.recipePage {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding-bottom: 2rem;
+}
 .recipeTitleDiv {
     color: #EA5E5E;
-    /* margin-left: 20px; */
     display: flex;
 }
-
-.recipeTitleDiv>h1 {
+.recipeTitleDiv > h1 {
     margin: auto;
     width: 80%;
     padding-bottom: 20px;
     padding-top: 20px;
 }
-
 .unfavedRecipePage {
     background-image: url('../../images/emptyHeart.png');
     width: 40px;
@@ -34,7 +34,6 @@
     background-size: 100%;
     margin-top: 30px;
 }
-
 .favedRecipePage {
     background-image: url('../../images/filledHeart.png');
     width: 40px;
@@ -42,7 +41,6 @@
     background-size: 100%;
     margin-top: 30px;
 }
-
 .servingsInfo {
     display: flex;
     flex-wrap: wrap;
@@ -50,7 +48,6 @@
     background-color: #EAFBEA;
     padding-bottom: 20px;
 }
-
 .recipePriceTimeServ {
     display: flex;
     width: 100%;
@@ -62,7 +59,6 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
 .recipePriceTimeServ>li {
     text-align: center;
     background-color: #f9fffd;
@@ -70,13 +66,10 @@
     border-radius: 10px;
     border: 3px solid #F97F7F;
 }
-
 .recipeIngredients {
     padding-top: 20px;
     padding-bottom: 20px;
-
 }
-
 .recipeSummary5 {
     font-size: 12px;
     margin-left: 10%;
@@ -85,19 +78,14 @@
     margin-bottom: 20px;
     text-align: center;
 }
-
 #recipeList5 {
-    /* margin-left: 43px; */
     text-align: center;
 }
-
 #InstructionsList5 {
-    /* margin-left: 43px; */
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
 }
-
 .conversion {
     font-size: 15px;
     font-weight: 800;
@@ -106,31 +94,25 @@
     padding-right: 8px;
     border-radius: 10px;
     margin-right: 30px;
-    /* margin-left: 50px; */
     border: 3px solid #F97F7F;
     background-color: #F97F7F;
 }
-
 .ingredientsAndNutrition {
     width: 100%;
     display: block;
     margin: auto;
     justify-content: center;
 }
-
 .recipeImgDiv {
     text-align: center;
 }
-
 #recipelink5 {
     color: #F97F7F;
 }
-
 .originalRecipe {
     text-align: center;
     margin-bottom: 15px;
 }
-
 #recipeInstructions5 {
     font-size: 15px;
     margin-left: 10%;
@@ -138,52 +120,39 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
 #recipeImg5 {
     width: 300px;
     border-radius: 15px;
     border: 3px solid #F97F7F;
 }
-
 #spoonacular-nutrition-label {
-    /* padding-top: 20px; */
     width: 100%;
     margin-left: 45px;
-    /* margin: auto; */
 }
-
 #ingredientTitleDiv5 {
     display: flex;
     justify-content: space-between;
 }
-
 .ingredientsList {
     margin-top: 15px;
     margin-left: 60px;
     margin-bottom: 20px;
     font-size: 15px;
 }
-
 #ingredientList5 {
     margin-left: 43px;
     display: flex;
 }
-
 .nutrition {
     width: 50%;
 }
-
 #recipeTitle5 {
     font-size: 25px;
     text-align: center;
 }
-
-
 #spoonacular-nutrition-label,
 #spoonacular-nutrition-ingredient-list {
     border: 2px solid black;
-    /* margin-right: 30px; */
-    /* flex-direction: row; */
     border-radius: 10px;
     width: 300px;
     padding: .5rem;
@@ -192,35 +161,27 @@
     color: #333;
     background-color: #fff
 }
-
 #spoonacular-nutrition-ingredient-list {
     text-transform: uppercase;
-
 }
-
 #spoonacular-nutrition-label div.separator {
     border-bottom: 10px solid black;
     font-size: 12px;
 }
-
-#spoonacular-nutrition-label>div:first-of-type {
+#spoonacular-nutrition-label > div:first-of-type {
     border-bottom: 10px solid black;
-    /* padding: 0 0 .05rem 0; */
     margin: 0 0 .5rem 0
 }
-
-#spoonacular-nutrition-label>div:first-of-type p {
+#spoonacular-nutrition-label > div:first-of-type p {
     margin: 0;
     font-size: 12px
 }
-
 #spoonacular-nutrition-label table {
     border-collapse: unset;
     border-spacing: 0;
     font-size: 12px;
     width: 100%
 }
-
 #spoonacular-nutrition-label table td {
     font-weight: normal;
     text-align: left;
@@ -230,77 +191,52 @@
     font-size: 10px;
     vertical-align: middle
 }
-
 #spoonacular-nutrition-label table .empty {
     width: 1rem;
     border-top: 0
 }
-
 #spoonacular-nutrition-label table #calorie-summary td {
     font-size: 12px;
     border: 0 none !important
 }
-
 #spoonacular-nutrition-label b {
     font-weight: 900;
-    /* font-size: 10px; */
 }
-
-/* #spoonacular-nutrition-label b:nth-of-type(1) {
-    font-weight: 1000;
-    font-size: 10px;
-} */
-
 #spoonacular-nutrition-label .separator td {
     border-top-width: 5px;
-
 }
-
 #spoonacular-nutrition-label table:first-of-type td:last-child {
     text-align: right !important;
-
 }
-
 #spoonacular-nutrition-label table:nth-of-type(2) td:first-child {
     text-align: left !important;
     font-size: 0px;
     border-color: white;
-
 }
-
 #spoonacular-nutrition-label table:nth-of-type(2) td:nth-of-type(2) {
     text-align: right !important;
     border-color: white;
     font-size: 0px;
     height: 0;
 }
-
 #spoonacular-nutrition-label .small {
     font-size: 10px;
     border-color: white;
-    /* display: none; */
 }
-
 #spoonacular-nutrition-label h1.separator {
     border-bottom: 1px solid black
 }
-
-
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
-
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -312,7 +248,6 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -324,26 +259,20 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 input:checked+.slider {
     background-color: #2196F3;
 }
-
 input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
 }
-
 input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
-
 .slider.round:before {
     border-radius: 50%;
 }

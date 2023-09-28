@@ -35,26 +35,8 @@ describe("Recipe", () => {
   })
   test('it renders a h2 tag', () => {
     const btn = screen.getByRole('h2')
-    // fireEvent.click(side);
     expect(btn).toBeInTheDocument();
   })
-  // test('it renders a h1 tag', () => {
-  //   const btn = screen.getByRole('h1')
-  //   // fireEvent.click(side);
-  //   expect(btn).toBeInTheDocument();
-  // })
-  // test('it renders a li tag', () => {
-  //   const btn = screen.getByRole('li')
-  //   // fireEvent.click(side);
-  //   expect(btn).toBeInTheDocument();
-  // })
-
-  // test('it renders a ol tag', () => {
-  //   const btn = screen.getByRole('ol')
-  //   // fireEvent.click(side);
-  //   expect(btn).toBeInTheDocument();
-  // })
-
 })
 
 describe("MealPlan redux 2", () => {
@@ -96,14 +78,5 @@ describe("MealPlan redux 2", () => {
         nutrition_widget: "no widget"
       }
     })
-    // const ul = screen.getByTestId('side');
-    // expect(ul).toBeInTheDocument();
-    // // const heading = screen.getByTestId("getMealsBtn");
-    // // expect(heading.textContent).toMatch(/Generate meal plan/i);
-
-    // const btn = screen.getByRole('h2')
-    // // fireEvent.click(side);
-    // expect(btn).toBeInTheDocument();
-
   })
 })

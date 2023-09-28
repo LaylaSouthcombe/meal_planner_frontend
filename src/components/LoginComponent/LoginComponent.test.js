@@ -15,7 +15,6 @@ describe("LoginComponent", () => {
 
   beforeEach(() => {
     jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
-    // jest.mock('axios')
   });
   const correct = (
     <Provider store={store}>
@@ -106,13 +105,10 @@ describe("LoginComponent", () => {
       email: 1,
       password: "todo 1"
     }
-    // mockAxios.get.mockImplementation(() => Promise.resolve({ data: dummyResponse }));
     fireEvent.submit(form)
     const response = await waitFor(() => axios.get.mockResolvedValue({ data: dummyResponse }))
-    // const response = await waitFor(() => axios.get = jest.fn(() => dummyResponse))
 
     expect(response).toHaveBeenCalledTimes(0)
-    // await waitFor(() => expect(navigate).toHaveBeenCalledWith("/MealPlan"));
 
   });
 });

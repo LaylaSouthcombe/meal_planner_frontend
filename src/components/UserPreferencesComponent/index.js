@@ -43,16 +43,11 @@ const UserPreferenceComponent = () => {
     const mealType = checkbox.target.name
     if (checkbox.target.checked == true) {
       setMeals({ ...meals, [mealType]: true });
-      // dispatch({ type: "SET USER MEALS", payload: meals });
     } else {
       setMeals({ ...meals, [mealType]: false });
     }
   }
 
-  // const handleCalorieChange = (e) => {
-  //   const mealType = e.target.name
-  //   setCalories({ ...calories, [mealType]: parseInt(e.target.value) });
-  // }
   const handleBudgetChange = (e) => {
     const mealType = e.target.name
     setBudget({ ...budget, [mealType]: parseInt(e.target.value) });
@@ -127,7 +122,7 @@ const UserPreferenceComponent = () => {
 
 
   return (
-    <>
+    <div className="preferencesContainer">
       <h1 className="userprefhead_3">Set Preferences</h1>
       <div className="preferences-box">
         <form data-testid="onsubmit" onSubmit={(e) => { onSubmit(e) }}>
@@ -153,14 +148,12 @@ const UserPreferenceComponent = () => {
                 <div key={index} className="services">
                   <div className="first-division">
                     <input
-
                       spellCheck="true"
                       name="service"
                       type="text"
                       id="service"
                       value={singleService.service}
                       onChange={(e) => handleServiceChange(e, index)}
-                      required
                     />
                     {intoleranceList.length - 1 === index && (
                       <button
@@ -185,22 +178,16 @@ const UserPreferenceComponent = () => {
               ))}
             </div>
           </div>
-
           <h3 className="h3meals_3">Meals</h3>
           <div className="meals-section">
             <div className="mealsection5">
               <div id="togglesection5">
                 <input data-testid="handleServiceChange2" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Breakfast" name="breakfast" id="expand-toggle" className="hhh_3" /> Breakfast
-                {/* <p className="expandable" id="p">Hi</p> */}
                 <div data-testid="label2" className="toggle-section" >
                   <label name="breakfast">
                     Budget(£):
                     <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="breakfast-budget" name="breakfast" />
                   </label>
-                  {/* <label>
-                Calories:
-                <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="breakfast-calories" name="breakfast" />
-              </label> */}
                 </div>
               </div>
               <div id="togglesection5">
@@ -210,10 +197,6 @@ const UserPreferenceComponent = () => {
                     Budget(£):
                     <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="lunch-budget" name="lunch" />
                   </label>
-                  {/* <label>
-                Calories:
-                <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="lunch-calories" name="lunch" />
-              </label> */}
                 </div>
               </div>
               <div id="togglesection5">
@@ -223,14 +206,9 @@ const UserPreferenceComponent = () => {
                     Budget(£):
                     <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dinner-budget" name="dinner" />
                   </label>
-                  {/* <label>
-                Calories:
-                <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="dinner-calories" name="dinner" />
-              </label> */}
                 </div>
               </div>
               <div>
-
               </div>
               <div id="togglesection5">
                 <input data-testid="handleServiceChange4" type="checkbox" onChange={(e) => { handleCheckboxChange(e) }} value="Snacks" name="snacks" /> Snacks
@@ -239,10 +217,6 @@ const UserPreferenceComponent = () => {
                     Budget(£):
                     <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="snacks-budget" name="snacks" />
                   </label>
-                  {/* <label>
-                Calories:
-                <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="snacks-calories" name="snacks" />
-              </label> */}
                 </div>
               </div>
               <div id="togglesection5">
@@ -252,24 +226,17 @@ const UserPreferenceComponent = () => {
                     Budget(£):
                     <input onChange={(e) => { handleBudgetChange(e) }} type="number" id="dessert-budget" name="dessert" />
                   </label>
-                  {/* <label>
-                Calories:
-                <input onChange={(e) => { handleCalorieChange(e) }} type="number" id="dessert-calories" name="dessert" />
-              </label> */}
                 </div>
               </div>
             </div>
-
             <button type="submit" className="submitbtn_3">Submit</button>
-
           </div>
-
         </form>
       </div>
       <div className="preferencesConfirmed" style={{ visibility: prefsMessageVisibility }}>
         <p id="prefP5" data-testid="p">Your preferences have been updated! Create a new meal plan <span id="spanLink5" data-testid="span" onClick={(() => navigate('/mealplan'))}>here</span></p>
       </div>
-    </>
+    </div>
   );
 }
 

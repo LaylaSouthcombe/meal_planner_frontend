@@ -1,16 +1,21 @@
 .randomRecipeContainer {
     text-align: center;
+    padding: 2rem 1rem;
 }
 .randomRecipeContainer > h3 {
     color: #EA5E5E;
     font-size: 26px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 .randomRecipe {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 75%;
+    margin: 0 auto;
 }
 
 .randomRecipeImg {
@@ -26,6 +31,9 @@
 
 .randomRecipeInfo {
     padding-top: 15px;color: #19323B;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .randomRecipeInfo > p:first-child{
     padding-bottom: 15px;
@@ -36,5 +44,16 @@
     padding-bottom: 15px;
     width: 60%;
     font-size: 20px;
-    margin:0 auto;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .randomRecipe {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .randomRecipeInfo > p:last-child{
+        width: 80%;
+    }
 }

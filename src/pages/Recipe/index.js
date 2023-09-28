@@ -28,14 +28,12 @@ const Recipe = () => {
             const url = `https://api.spoonacular.com/recipes/${stateRecipeId}/nutritionLabel/?apiKey=${apiKey}&defaultCss=false`
             const { data } = await axios.get(url)
             nutritionWidget = data
-            // console.log(nutritionWidget)
             stateWidget = { recipeId: stateRecipeId, nutrition_widget: nutritionWidget }
             dispatch({ type: "SET NUTRITION WIDGET", payload: stateWidget })
         } catch (err) {
             console.log(err)
         }
     }
-    // console.log(stateWidget)
 
     if (stateNutritionWidget === "no widget") {
         fetchRecipeNutrition()
@@ -43,8 +41,6 @@ const Recipe = () => {
     if (stateNutritionWidget.recipeId !== stateRecipeId) {
         fetchRecipeNutrition()
     }
-    // console.log(stateNutritionWidget.recipeId)
-    // console.log(stateRecipeId)
     let recipe
     if (stateRandomRecipe.id === parseInt(stateRecipeId)) {
         recipe = stateRandomRecipe
@@ -52,16 +48,7 @@ const Recipe = () => {
     if (stateRecipe.id === parseInt(stateRecipeId)) {
         recipe = stateRecipe
     }
-
-    // for (let i = 0; i < Object.keys(stateMealPlanRecipes).length; i++) {
-    //     for (let j = 0; j < Object.values(stateMealPlanRecipes)[i].length; j++) {
-    //         if (Object.values(stateMealPlanRecipes)[i][j].id === parseInt(stateRecipeId)) {
-    //             recipe = Object.values(stateMealPlanRecipes)[i][j]
-    //         }
-    //     }
-    // }
-
-    // console.log(recipe.fave)
+    
     const setUnit = (e) => {
         console.log(e.target.id)
         if (e.target.id === "metric") {
@@ -75,7 +62,8 @@ const Recipe = () => {
     }
 
     return (
-        <>{recipe.title.length && (
+        <div className="recipePage">
+            {recipe.title.length && (
             <>
                 <div data-testid="side" className="backButton" onClick={() => navigate(-1)}><img src={backArrow} alt="back button" /><p>Back</p></div>
                 <div className="recipeTitleDiv">
@@ -137,7 +125,7 @@ const Recipe = () => {
                 </div>
             </>
         )}
-        </>
+        </div>
     );
 
 }

@@ -82,8 +82,6 @@ describe("Meal plan fave function", () => {
   });
 })
 
-
-///////History if statement//////////
 describe("History CollapsibleRecipe", () => {
   const navigate = jest.fn();
   let fullRecipes = {lunch: [{

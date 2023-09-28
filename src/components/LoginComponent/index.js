@@ -18,12 +18,7 @@ const LoginComponent = () => {
   const getUserMealHistory = async () => {
       const { data } = await axios.get(
         `${backendUrl}mealhistory/`);
-        console.log(data)
-      // if("recipes" in data){
-        console.log(data[0].recipes)
         dispatch({ type: "SET USER RECIPE HISTORY", payload: data });
-      // }
-      
     dispatch({ type: "SET MEAL PLAN RECIPES", payload: data[0].recipes });
   }
 
@@ -31,25 +26,15 @@ const LoginComponent = () => {
     const { data } = await axios.get(
       `${backendUrl}prefs/`);
     console.log(data)
-    // if(!"error" in data){
       const budgets = data[0].budget
       const intolerences = data[0].intolorences
       const userMeals = data[8]
-      //TODO: should be [0], but the data in db needs to be wiped
-
-      // const formattedCaloriesString = calorieLimits.replaceAll(`'`, `"`)
-      // console.log("formatted calories", formattedCaloriesString)
       const formattedbudgetsString = budgets.replaceAll(`'`, `"`)
-      console.log("formatted budgets", formattedbudgetsString)
-      // const caloriesObj = JSON.parse(formattedCaloriesString)
       const budgetObj = JSON.parse(formattedbudgetsString)
-      // console.log("caloriesObj", caloriesObj)
       console.log("budgetObj", budgetObj)
-      // dispatch({ type: "SET USER CALORIES", payload: caloriesObj });
       dispatch({ type: "SET USER BUDGETS", payload: budgetObj });
       dispatch({ type: "SET USER MEALS", payload: userMeals });
       dispatch({ type: "SET USER INTOLERANCES", payload: intolerences });
-    // }
   }
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -59,7 +44,6 @@ const LoginComponent = () => {
         setErrorVisibility("visible");
         setError("Fields should not be empty");
       } else {
-        //login
         await axios.post(
           `${backendUrl}${route}`,
           JSON.stringify({ email, password }),

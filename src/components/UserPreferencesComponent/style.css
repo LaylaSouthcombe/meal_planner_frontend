@@ -7,7 +7,6 @@
 
 .h3diets_3 {
   position: relative;
-  /* margin-left: 25px; */
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
@@ -16,24 +15,18 @@
 .paradiets_3 {
   position: relative;
   text-align: center;
-  /* margin-left: 25px; */
-  /* margin-right: 10px; */
   font-size: 15px;
   margin-bottom: 10px;
 }
 
 .h3intol_3 {
-  /* position: relative; */
   text-align: center;
-  /* margin-left: 25px;*/
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .h3meals_3 {
-  /* position: relative; */
   text-align: center;
-  /* margin-left: 25px;*/
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -45,7 +38,10 @@
   color: #EA5E5E;
   margin-bottom: 10px;
 }
-
+.preferencesContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
 .userprefhead_3 h1 {
   justify-content: center;
 }
@@ -55,22 +51,25 @@
   grid-template-columns: 1fr;
 }
 
-
-
 #togglesection5>input[type=checkbox]:checked+.toggle-section {
   visibility: visible;
 }
-
+.meals-section {
+  width: 75%;
+  margin: 0 auto;
+}
 .experience__content {
   display: grid;
-  margin-left: 50px;
   grid-template-columns: 0fr 2fr 0fr 2fr;
   gap: 0.2rem;
-  font-size: 12px;
+  font-size: 1rem;
   justify-content: center;
-
+  width: 75%;
+  margin: 0 auto;
 }
-
+.experience__content > input {
+  width: fit-content;
+}
 #togglesection5>.toggle-section {
   visibility: hidden;
 
@@ -81,13 +80,8 @@ input[value=targetText] {
 }
 
 .toggle-section {
-  /* margin-left: 30px; */
-  /* justify-self: end; */
   font-size: 15px;
-  /* width: auto; */
   margin-right: 60px;
-  /* flex-grow: 1; */
-
   margin-left: auto;
 }
 
@@ -115,7 +109,9 @@ input[value=targetText] {
   margin-left: 20px;
   margin-right: 20px;
 }
-
+#prefP5 > span {
+  cursor: pointer;
+}
 .submitbtn_3 {
   background-color: #F97F7F;
   margin-left: 36%;
@@ -134,16 +130,12 @@ input[value=targetText] {
 #togglesection5 {
   text-align: center;
   font-size: 15px;
-  /* margin-right: 0; */
-  /* width: 50px; */
 }
-
 
 .mealsection5>#togglesection5 {
   display: flex;
   margin-left: 35px;
   width: 100%;
-  /* justify-content: space-evenly; */
   margin-bottom: 5px;
   flex-wrap: wrap;
   flex-direction: row;
@@ -157,7 +149,6 @@ input[value=targetText] {
 #dessert-budget {
   width: 40px;
   margin-left: 10px;
-  /* padding-left: 10px; */
   text-align: center;
   border-radius: 5px;
   border: 0;

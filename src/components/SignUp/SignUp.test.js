@@ -134,14 +134,6 @@ describe("SignUp", () => {
     fireEvent.click(button);
 
     expect(axios.post).toHaveBeenCalled();
-    // With(
-    //   "https://mealplannerserver.herokuapp.com/createuser/",
-    //   expect.objectContaining({
-    //     name: "testing",
-    //     email: "testing@test.com",
-    //     password: "tesaaa",
-    //   })
-    // );
   });
 
   test("naviagate", () => {

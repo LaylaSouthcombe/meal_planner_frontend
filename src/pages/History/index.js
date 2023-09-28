@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 import Collapsible from 'react-collapsible';
@@ -8,7 +8,6 @@ import { CollapsibleRecipes } from '../../components';
 import './style.css'
 
 const History = () => {
-    const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const recipeId = useSelector(state => state.recipe_id)
@@ -19,8 +18,6 @@ const History = () => {
     const [favourited, setFavourited] = useState(false)
     const [btnText, setBtnText] = useState('Show Favourites')
     
-    const stateRecipe = useSelector(state => state.recipe)
-    console.log("state recipe", stateRecipe)
     const onBtnClick = (e) => {
         e.preventDefault()
         if (favourited) {
@@ -31,18 +28,6 @@ const History = () => {
             setBtnText('Show All')
         }
     }
-    const initialUsersHistoryRecipes = [
-        {
-            date: "date", recipes: {
-                breakfast: [{ id: "", title: "", fave: "" }],
-                lunch: [{ id: "", title: "", fave: "" }],
-                dinner: [{ id: "", title: "", fave: "" }],
-                dessert: [{ id: "", title: "", fave: "" }],
-                snacks: [{ id: "", title: "", fave: false }]
-            }
-        }
-    ]
-
 
     return (
         <>
@@ -72,9 +57,6 @@ const History = () => {
                                     {week.recipes.breakfast.length > 0 && (
                                         <CollapsibleRecipes favourited={favourited} fullRecipes={week.recipes} triggerName="Breakfast" meal="breakfast" page="history" date={week.today_date} />
                                     )}
-                                    {/* {week.recipes.breakfast.length > 0 && (
-                        <CollapsibleRecipes recipes={recipes} triggerName="Breakfast"/>
-                        )} */}
                                     {week.recipes.lunch.length > 0 && (
                                         <CollapsibleRecipes favourited={favourited} fullRecipes={week.recipes} triggerName="Lunch" meal="lunch" page="history" date={week.today_date} />
                                     )}

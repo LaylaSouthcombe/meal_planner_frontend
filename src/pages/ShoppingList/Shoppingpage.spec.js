@@ -33,19 +33,9 @@ describe("Category", () => {
 
   test("it renders the no shopping list ", () => {
     render(page);
-    // stateShoppingList  =0 ;
     const text = screen.getByTestId("custom-element");
     expect(text.textContent).toContain("You have not got a shopping list, generate a meal plan");
   });
-
-  // test("it renders shopping list ", () => {
-  //   const spy = jest.spyOn(redux, 'useSelector')
-  //   spy.mockReturnValue({ username:'test' })
-  //   render(page);
-  //   // stateShoppingList  =0 ;
-  //   const text = screen.getByTestId("custom-element");
-  //   expect(text.textContent).toContain("You have not got a shopping list, generate a meal plan");
-  // });
 
   test("it navigates you one page back", () => {
     render(page);
